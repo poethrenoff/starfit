@@ -1,0 +1,18 @@
+<script>
+	function random()
+	{
+		var ot = parseInt( document.getElementById('ot').value );
+		var po = parseInt( document.getElementById('po').value ) + 1;
+		
+		if ( isNaN( ot ) || isNaN( po ) )
+		{
+			alert( 'Ошибка!' );
+			return;
+		}
+		
+		var rnd = Math.floor( Math.random() * ( po - ot ) + ot );
+		
+		document.getElementById('rnd').value = rnd;
+	}
+</script>
+Случайное число от <input id="ot" value="1"/> по <input id="po" value="10"/> <input type="button" value="Расcчитать" onclick="random()"/> <input id="rnd" value="" readonly="readonly"/>
