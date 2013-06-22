@@ -1,0 +1,131 @@
+html,body {
+    position:relative;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+
+}
+
+body {
+    background: #fff;
+}
+
+a img {
+    border: 0;
+}
+
+ul {
+    /*list-style: inside;*/
+}
+
+h1 {
+    font-size:30px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+h4 {
+    font-size: 16px;
+}
+
+h5 {
+    font-size: 14px;
+}
+
+h6 {
+    font-size: 13px;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    color:#565656;
+    font-weight: 400;
+}
+
+h1 {
+    margin-top:0;
+}
+
+p {
+    margin:0 0 7px 0;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 7px;
+}
+
+body,table,tr,td,div,p,a,ul,li,ol {
+    font-size: 12px;
+    font-family:Arial;
+    color: #656565;
+}
+
+a {
+    color: #1988cb;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #115f8e;
+    text-decoration: none;
+}
+
+.ac{
+    text-align: center;
+}
+
+#main {
+    position:relative;
+    min-height: 100%;
+}
+
+*html #main { /* FIX ie6 */
+    height: 100%; /* min-height */
+}
+
+#wrap {
+    position:relative;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+/* FOOTER */
+
+/* clearfix */
+.clearfix:after {content: ".";
+                 display: block;
+                 height: 0;
+                 clear: both;
+                 visibility: hidden;}
+.clearfix {display: inline-block;}
+/* Hides from IE-mac \*/
+* html .clearfix { height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */
+
+
+
+#footerFix { 
+    height: 65px; 
+}
+
+#footer {
+    position: relative;
+    z-index:10;
+    height: 65px;
+    margin-top: -65px;
+}
+
+#footer-wrap {
+    position:relative;
+    width: 1000px;
+    margin: 0 auto;
+    padding-top:30px;
+    color:#fff;
+}

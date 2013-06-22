@@ -8,7 +8,7 @@ ini_set('error_reporting', E_ALL & ~E_STRICT);
 setlocale(LC_ALL, 'ru_RU.UTF8');
 ini_set('date.timezone', 'Europe/Moscow');
 
-define('SITE_TITLE', 'Заголовок сайта');
+define('SITE_TITLE', 'StarFit');
 
 define('DB_TYPE', 'mysql'); // mysql, pgsql, sqlite
 define('DB_HOST', 'localhost');
