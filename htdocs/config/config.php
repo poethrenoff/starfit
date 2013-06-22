@@ -12,9 +12,9 @@ define('SITE_TITLE', 'Заголовок сайта');
 
 define('DB_TYPE', 'mysql'); // mysql, pgsql, sqlite
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'adminko');
-define('DB_USER', 'adminko');
-define('DB_PASSWORD', 'adminko');
+define('DB_NAME', 'starfit');
+define('DB_USER', 'starfit');
+define('DB_PASSWORD', 'starfit');
 
 define('APP_DIR', dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR);
 
