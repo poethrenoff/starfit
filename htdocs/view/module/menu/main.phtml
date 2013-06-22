@@ -1,3 +1,7 @@
+					<ul class="b-menu">
+<? $menu_index = 1; $menu_count = $this->children_count(); ?>
 <? foreach ($this->get_children() as $menu_item) { ?>
-	<a<? if ( $menu_item->is_selected ) { ?> style="font-weight: bold"<? } ?> href="<?= $menu_item->get_menu_url() ?>"><?= h( $menu_item->get_menu_title() ) ?></a><br/>
+						<li<? if ($menu_index == $menu_count) { ?> class="last"<? } ?>><a href="<?= $menu_item->get_menu_url() ?>"><?= $menu_item->get_menu_title() ?></a></li>
+<? 		$menu_index++; ?>
 <? } ?>
+					</ul>

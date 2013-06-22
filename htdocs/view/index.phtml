@@ -1,35 +1,64 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+<!DOCTYPE html>
+<html>
 	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title><?= h( $this -> meta_title ) ?></title>
 		<meta name="keywords" content="<?= h( $this -> meta_keywords ) ?>"/> 
 		<meta name="description" content="<?= h( $this -> meta_description ) ?>"/> 
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" type="text/css" href="/css/index.css"/>
+		<script type="text/javascript" src="/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.form.js"></script>
+		<script type="text/javascript" src="/js/plupload.full.js"></script>
+		<script type="text/javascript" src="/js/custom.js"></script>
+		<link type="text/css" rel="stylesheet" href="/css/base.css" />
+		<link type="text/css" rel="stylesheet" href="/css/style.css" />
 	</head>
 	<body>
-		<table class="main" border="1">
-			<tr>
-				<td class="header" colspan="3">
-<?= block( 'block/header' ) ?> 
-				</td>
-			</tr>
-			<tr>
-				<td class="menu">
-<?= $this -> menu ?> 
-				</td>
-				<td class="content">
-<?= $this -> content ?> 
-				</td>
-				<td class="news">
-<?= $this -> news ?> 
-				</td>
-			</tr>
-			<tr>
-				<td class="footer" colspan="3">
-<?= block( 'block/footer' ) ?> 
-				</td>
-			</tr>
-		</table>
+		<div id="main">
+			<div id="wrap">
+				<div class="b-header">
+					<div class="top">
+						<div class="contacts">
+<?= $this->contact ?>
+						</div>
+					</div>
+					<a href="/" class="logo"><img src="/image/logo.png" /></a>
+					<div class="phones">
+<?= $this->phone ?>
+					</div>
+					<div class="search">
+<?= $this->search ?>
+					</div>
+					<div class="basket">
+<?= $this->cart ?>
+					</div>
+					<div class="login">
+<?= $this->subscribe ?>
+					</div>
+<?= $this->menu ?>
+				</div>
+				<div class="b-content">
+					<div class="left">
+						<div class="wrap">
+<?= $this->catalogue ?>
+<?= $this->article ?>
+						</div>
+					</div>
+					<div class="right">
+						<div class="wrap">
+<?= $this->teaser ?>
+<?= $this->marker ?>
+<?= $this->content ?>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="b-promo">
+<?= $this->advice ?>
+					<div class="copyright">
+<?= $this->copyright ?>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
