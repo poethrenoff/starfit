@@ -1,0 +1,76 @@
+					<div class="block first">
+						<div class="b-form">
+							<h1><i></i>Подписка на прайс-лист</h1>
+<? if (session::flash('success')) { ?>
+							<p style="color: #448600; font-size: 16px;"><b>Спасибо. Ваша анкета отправлена.</b></p>
+<? } ?>
+							<p>Если Вы хотите всегда быть в курсе наших цен и ассортимента, оформите подписку на прайс-лист. Рассылка осуществляется не чаще 1 раза в месяц.</p>
+							<form method="POST">
+								<div class="field">
+									E-mail <span class="require">*</span>:
+									<br />
+									<input type="text" class="input" name="email" value="<?= h($this->from_request('email')) ?>" />
+<? if ($this->error['email']) { ?>
+									<span class="require"><?= $this->error['email'] ?></span>
+<? } ?>
+								</div>
+								<div class="field">
+									Ваше имя, фамилия, отчество <span class="require">*</span>:
+									<br />
+									<input type="text" class="input" name="person" value="<?= h($this->from_request('person')) ?>" />
+<? if ($this->error['person']) { ?>
+									<span class="require"><?= $this->error['person'] ?></span>
+<? } ?>
+								</div>
+								<div class="field">
+									Название компании (для юрлиц):
+									<br />
+									<input type="text" class="input" name="name" value="<?= h($this->from_request('name')) ?>" />
+<? if ($this->error['name']) { ?>
+									<span class="require"><?= $this->error['name'] ?></span>
+<? } ?>
+								</div>
+								<div class="field">
+									Тип компании (для юрлиц обязательно):
+									<br />
+									<select name="type" style="width: 318px;">
+										<option value=""></option>
+<? foreach ($this->type_list as $value => $title) { ?>
+										<option value="<?= $value ?>"<? if ($this->in_request('type', $value)) { ?> selected="selected"<? } ?>><?= $title ?></option>
+<? } ?>
+									</select>
+<? if ($this->error['type']) { ?>
+									<span class="require"><?= $this->error['type'] ?></span>
+<? } ?>
+								</div>
+								<div class="field">
+									Телефон (для юрлиц обязательно):
+									<br />
+									<input type="text" class="input" name="phone" value="<?= h($this->from_request('phone')) ?>" />
+<? if ($this->error['phone']) { ?>
+									<span class="require"><?= $this->error['phone'] ?></span>
+<? } ?>
+								</div>
+								<div class="field">
+									Факс (для юрлиц обязательно):
+									<br />
+									<input type="text" class="input" name="fax" value="<?= h($this->from_request('fax')) ?>" />
+<? if ($this->error['fax']) { ?>
+									<span class="require"><?= $this->error['fax'] ?></span>
+<? } ?>
+								</div>
+								<div class="field fail">
+									<img src="/image/captcha.php" />
+									<input type="text" class="input" name="captcha" value="" />
+<? if ($this->error['captcha']) { ?>
+									<span class="require"><?= $this->error['captcha'] ?></span>
+<? } ?>
+									<br />
+									Введите символы с картинки
+								</div>
+								<div class="field">
+									<input type="submit" value="Зарегистрироваться" class="btn" />
+								</div>
+							</form>
+						</div>
+					</div>
