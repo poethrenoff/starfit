@@ -1,0 +1,8 @@
+							 <div class="block first">
+								<h1><i></i><?= $this->get_catalogue_title() ?: 'Продукция' ?></h1>
+<? foreach ($this->get_children() as $catalogue_item) { ?>
+								<div class="catalog-link"><a href="<?= $catalogue_item->get_catalogue_url() ?>"><?= $catalogue_item->get_catalogue_title() ?></a></div>
+<? } ?>
+								<div class="catalog">
+								</div>
+							</div>

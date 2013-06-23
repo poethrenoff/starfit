@@ -1,0 +1,8 @@
+							 <div class="block first">
+								<h1><i></i>Результаты поиска</h1>
+<? foreach ($this->result_list as $product_item) { ?>
+								<div class="catalog-link"><a href="<?= $product_item->get_product_url() ?>"><?= $product_item->get_product_title() ?></a></div>
+<? } ?>
+								<div class="catalog">
+								</div>
+							</div>

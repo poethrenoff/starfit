@@ -24,7 +24,7 @@ class metadata
                 'menu_id' => array('title' => 'Идентификатор', 'type' => 'pk'),
                 'menu_parent' => array('title' => 'Родительский элемент', 'type' => 'parent'),
                 'menu_title' => array('title' => 'Заголовок', 'type' => 'string', 'show' => 1, 'main' => 1, 'errors' => 'require'),
-                'menu_page' => array('title' => 'Раздел', 'type' => 'table', 'table' => 'page', 'show' => 1),
+                'menu_page' => array('title' => 'Раздел', 'type' => 'table', 'table' => 'page'),
                 'menu_url' => array('title' => 'URL', 'type' => 'string', 'show' => 1),
                 'menu_order' => array('title' => 'Порядок', 'type' => 'order', 'group' => array('menu_parent')),
                 'menu_active' => array('title' => 'Видимость', 'type' => 'active')
@@ -121,6 +121,7 @@ class metadata
             'fields' => array(
                 'marker_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
                 'marker_title' => array( 'title' => 'Название', 'type' => 'string', 'show' => 1, 'main' => 1, 'sort' => 'asc', 'errors' => 'require' ),
+                'marker_name' => array( 'title' => 'Системное имя', 'type' => 'string', 'show' => 1, 'errors' => 'require', 'group' => array() ),
                 'marker_picture' => array( 'title' => 'Картинка', 'type' => 'image', 'upload_dir' => 'marker' ),
              ),
             'relations' => array(

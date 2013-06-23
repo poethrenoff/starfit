@@ -24,7 +24,7 @@ function ImagePreload() {
 }
 
 function buyItem(id){
-    $.get('/catalog/buy/' + id + '/',function (response){
+    $.get('/cart/add/' + id + '/',function (response){
         $(".basket").html(response);
         $(".in-basket").show();
         
@@ -39,7 +39,7 @@ function buyItem(id){
             var end_l = b.offset().left;
             var width = i.width();
             
-            i  
+            i
             .clone()  
             .css({
                 'position' : 'absolute', 
@@ -59,12 +59,11 @@ function buyItem(id){
                 $(this).remove();  
             });
         }
-        
     });
 }
 
 function deleteItem(id){
-    $.get('/catalog/delete/' + id + '/',function (response){
+    $.get('/cart/delete/' + id + '/',function (response){
         $(".basket").html(response);
         window.location.reload();
     });
@@ -90,5 +89,4 @@ $(document).ready(function(){
             }
         });
     }
-    
 });

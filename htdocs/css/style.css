@@ -437,6 +437,10 @@ textarea.input {
     color:#a3235a;
 }
 
+.b-content .left .block.articles{
+    padding-bottom:20px;
+}
+
 .b-content .left .block.articles .item .name{
     background: url(/image/articles-block-bg.png) no-repeat 0 0;
     padding-left:20px;
@@ -540,8 +544,12 @@ textarea.input {
 .b-content .right .catalog .item .wrap .info .photo{
     float:left;
     width:120px;
-    height: 148px;
+    height: 120px;
     text-align: center;
+}
+
+.b-content .right .catalog.marker .item .wrap .info .photo{
+    height: 148px;
 }
 
 .b-content .right .catalog .item .wrap .info .photo .image{
@@ -549,9 +557,17 @@ textarea.input {
     max-height: 115px;
 }
 
+.b-content .right .catalog .item .wrap .info .photo .marker{
+    position: absolute;
+    z-index: 100;
+    width: 115px;
+    text-align: right;
+}
+
 .b-content .right .catalog .item .wrap .info .price-container{
     margin-left:130px;
     text-align: right;
+    margin-top: 40px;
 }
     .b-content .right .catalog.marker .item .wrap .info .price-container{
         position: absolute;
@@ -673,6 +689,13 @@ textarea.input {
 
 .b-catalog-item .info .photo .image{
     width:250px;
+}
+
+.b-catalog-item .info .photo .marker{
+    position: absolute;
+    z-index: 100;
+    width: 250px;
+    text-align: right;
 }
 
 .b-catalog-item .info .price-container{
