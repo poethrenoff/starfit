@@ -2,10 +2,10 @@
 /**
  * SimpleCaptcha class
  */
-class Captcha {
+class captcha {
 
     /** Width of the image */
-    public $width  = 180;
+    public $width  = 150;
 
     /** Height of the image */
     public $height = 50;

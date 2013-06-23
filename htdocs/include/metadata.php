@@ -66,7 +66,7 @@ class metadata
                 'teaser_id' => array('title' => 'Идентификатор', 'type' => 'pk'),
                 'teaser_title' => array('title' => 'Заголовок', 'type' => 'string', 'show' => 1, 'main' => 1, 'errors' => 'require'),
                 'teaser_image' => array('title' => 'Изображение', 'type' => 'image', 'upload_dir' => 'teaser', 'errors' => 'require'),
-                'teaser_url' => array('title' => 'URL', 'type' => 'string', 'show' => 1, 'errors' => 'require'),
+                'teaser_url' => array('title' => 'URL', 'type' => 'string', 'errors' => 'require'),
                 'teaser_order' => array('title' => 'Порядок', 'type' => 'order'),
                 'teaser_active' => array('title' => 'Видимость', 'type' => 'active'),
              ),

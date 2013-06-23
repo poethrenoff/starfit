@@ -1,14 +1,10 @@
 							<div class="block articles">
 								<h2><i></i>Статьи</h2>
+<? foreach ($this->article_list as $article_item) { ?>
 								<div class="item">
-									<div class="name"><a href="/articles/5/">Спортивные тренажеры Alex</a></div>
+									<div class="name"><a href="<?= url_for(array('controller' => 'article', 'action' => 'item', 'id' => $article_item->get_id())) ?>"><?= $article_item->get_article_title() ?></a></div>
 								</div>
-								<div class="item">
-									<div class="name"><a href="/articles/4/">Тренажеры WNQ</a></div>
-								</div>
-								<div class="item">
-									<div class="name"><a href="/articles/3/">О тренажерах WNQ Magnum</a></div>
-								</div>
-								<div class="more"><a href="/articles/">Все статьи</a></div>
+<? } ?>
+								<div class="more"><a href="<?= url_for(array('controller' => 'article')) ?>">Все статьи</a></div>
 							</div>
 

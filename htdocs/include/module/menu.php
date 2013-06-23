@@ -27,15 +27,4 @@ class module_menu extends module
         $this->view->assign($menu_tree);
         $this->content = $this->view->fetch('module/menu/' . $menu_template);
     }
-    
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    // Дополнительные параметры хэша модуля
-    protected function ext_cache_key()
-    {
-        $current_page = page();
-        
-        return parent::ext_cache_key() +
-            array('_page' => $current_page['page_id']);
-    }
 }
