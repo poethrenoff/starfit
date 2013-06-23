@@ -44,6 +44,10 @@ a.btn.small {
     text-align: right;
 }
 
+.ac {
+    text-align: center;
+}
+
 .red {
     color:#ff0000;
 }

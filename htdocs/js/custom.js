@@ -62,10 +62,53 @@ function buyItem(id){
     });
 }
 
-function deleteItem(id){
-    $.get('/cart/delete/' + id + '/',function (response){
+function incItem($incLink){
+    shiftItem($incLink, +1);
+}
+
+function decItem($decLink){
+    shiftItem($decLink, -1);
+}
+
+function shiftItem($shiftLink, shift){
+    var $row = $shiftLink.parents('tr:first');
+    var $qntInput = $row.find('input[name^=quantity]');
+    var $priceInput = $row.find('input[name^=price]');
+    var qnt = parseInt($qntInput.val());
+    var price = parseInt($priceInput.val());
+    var $qntCell = $row.find('td').eq(3);
+    var $costCell = $row.find('td').eq(4);
+    
+    qnt = qnt + shift;
+    
+    if (qnt > 0) {
+        $qntInput.val(qnt);
+        $qntCell.html(qnt);
+        $costCell.html(qnt * price);
+        
+        updateCart();
+    }
+}
+
+function updateCart(){
+    var totalQnt = 0; var totalSum = 0;
+    $('#cart').find('input[name^=quantity]').each(function(){
+        var $qntInput = $(this);
+        var $priceInput = $qntInput.parent().find('input[name^=price]');
+        var qnt = parseInt($qntInput.val());
+        var price = parseInt($priceInput.val());
+        totalQnt += qnt;
+        totalSum += qnt * price;
+    });
+    
+    var $totalRow = $('#cart').find('tr:last');
+    var $totalQntCell = $totalRow.find('td').eq(1);
+    var $totalSumCell = $totalRow.find('td').eq(2);
+    $totalQntCell.find('strong').html(totalQnt);
+    $totalSumCell.find('strong').html(totalSum);
+    
+    $('#cart').ajaxSubmit(function(response){
         $(".basket").html(response);
-        window.location.reload();
     });
 }
 

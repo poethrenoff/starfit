@@ -1,1 +1,1 @@
-						В <a href="/cart">корзине</a> 0 товаров на сумму 0 руб
+						В <a href="/cart">корзине</a> <?= declOfNum($this->get_quantity(), array('товар', 'товара', 'товаров')) ?> на сумму <?= $this->get_sum() ?> руб.
