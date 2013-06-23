@@ -1,0 +1,86 @@
+							<script type="text/javascript" src="/js/jquery.form.js"></script>
+							<div class="block first">
+								<h1><i></i>Корзина</h1>
+<? if ($this->get_quantity()) { ?>
+								<div class="b-order">
+									<form method="post" id="cart" action="<?= url_for(array('controller' => 'cart', 'action' => 'save')) ?>">
+										<table class="items">
+											<tr>
+												<td width="50">
+													&nbsp;
+												</td>
+												<td class="ac">
+													<b>Товар</b>
+												</td>
+												<td width="50" class="ac">
+													<b>Цена</b>
+												</td>
+												<td width="50" class="ac">
+													<b>Кол-во</b>
+												</td>
+												<td width="50" class="ac">
+													<b>Стоимость</b>
+												</td>
+												<td width="50" class="ac">
+													<b>Изменить</b>
+												</td>
+												<td width="50" class="ac">
+													<b>Удалить</b>
+												</td>
+											</tr>
+<? 		foreach ($this->get() as $item) { ?>
+<? 			$product_item = model::factory('product')->get($item->id); ?>
+											<tr>
+												<td width="50">
+													<img src="<?= $product_item->get_product_image() ?>" class="image" />
+												</td>
+												<td>
+													<?= $product_item->get_product_title() ?>
+												</td>
+												<td width="50" class="ar">
+													<?= $product_item->get_product_price() ?>
+												</td>
+												<td width="50" class="ar">
+													<?= $item->quantity ?>
+												</td>
+												<td width="50" class="ar">
+													<?= $item->quantity * $product_item->get_product_price() ?>
+												</td>
+												<td width="50" class="ac">
+													<input type="hidden" value="<?= $item->price ?>" name="price[<?= $product_item->get_id() ?>]"/>
+													<input type="hidden" value="<?= $item->quantity ?>" name="quantity[<?= $product_item->get_id() ?>]"/>
+													<a href="" onclick="incItem($(this)); return false"><img src="/image/plus.gif" alt="Увеличить" title="Увеличить"/></a> / <a href="" onclick="decItem($(this)); return false"><img src="/image/minus.gif" alt="Уменьшить" title="Уменьшить"/></a>
+												</td>
+												<td width="50" class="ac">
+													<a href="<?= url_for(array('controller' => 'cart', 'action' => 'delete', 'id' => $product_item->get_id())) ?>"><img src="/image/delete.gif" alt="Удалить" title="Удалить"/></a>
+												</td>
+											</tr>
+<? 		} ?>
+											<tr>
+												<td colspan="3" class="ar">
+													<strong>Итого:</strong>
+												</td>
+												<td width="50" class="ar">
+													<strong><?= $this->get_quantity() ?></strong>
+												</td>
+												<td width="50" class="ar">
+													<strong><?= $this->get_sum() ?>
+												</td>
+												<td width="50" class="ar">
+													&nbsp;
+												</td>
+												<td width="50" class="ar">
+													&nbsp;
+												</td>
+											</tr>
+										</table>
+									</form>
+									<br/>
+									<input type="button" value="Оформить заказ" onclick="window.location.href = '<?= url_for(array('controller' => 'order')) ?>'" class="button"/>
+									&nbsp;&nbsp;&nbsp;
+									<input type="button" value="Очистить корзину" onclick="if ( confirm('Вы уверены, что хотите очистить корзину?') ) { window.location.href = '<?= url_for(array('controller' => 'cart', 'action' => 'clear')) ?>'; }"/>
+								</div>
+<? } else { ?>
+								<p>Ваша корзина пуста.</p>
+<? } ?>
+							</div>
