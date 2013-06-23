@@ -142,6 +142,37 @@ class metadata
              ),
         ),
         
+        /**
+         * Таблица "Заказы"
+         */
+        'orders' => array(
+            'title' => 'Заказы',
+            'fields' => array(
+                'order_id' => array('title' => 'Идентификатор', 'type' => 'pk'),
+                'order_client_name' => array('title' => 'Клиент', 'type' => 'string', 'main' => 1, 'errors' => 'require'),
+                'order_client_phone' => array('title' => 'Телефон', 'type' => 'string'),
+                'order_client_email' => array('title' => 'Email', 'type' => 'string', 'errors' => 'email'),
+                'order_client_address' => array('title' => 'Адрес', 'type' => 'text'),
+                'order_client_comment' => array('title' => 'Комментарий', 'type' => 'text'),
+                'order_date' => array('title' => 'Дата заказа', 'type' => 'datetime', 'show' => 1, 'sort' => 'desc', 'errors' => 'require'),
+                'order_sum' => array('title' => 'Сумма заказа', 'type' => 'float', 'show' => 1, 'errors' => 'require'),
+            ),
+            'links' => array(
+                'order_item' => array('table' => 'order_item', 'field' => 'item_order', 'ondelete' => 'cascade'),
+            )
+        ),
+        
+        'order_item' => array(
+            'title' => 'Позиции заказов',
+            'fields' => array(
+                'item_id' => array('title' => 'Идентификатор', 'type' => 'pk'),
+                'item_order' => array('title' => 'Заказ', 'type' => 'table', 'table' => 'orders', 'errors' => 'require'),
+                'item_title' => array('title' => 'Товар', 'type' => 'string', 'main' => 1, 'errors' => 'require'),
+                'item_price' => array('title' => 'Цена', 'type' => 'float', 'show' => 1, 'errors' => 'require'),
+                'item_quantity' => array('title' => 'Количество', 'type' => 'int', 'show' => 1, 'errors' => 'require')
+            )
+        ),
+        
         ////////////////////////////////////////////////////////////////////////////////////////
         
         /**
