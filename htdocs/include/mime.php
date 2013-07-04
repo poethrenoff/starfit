@@ -1,5 +1,5 @@
 <?php
-class Mime
+class mime
 {
 	public static $types = array(
 		'hqx'	=>	'application/mac-binhex40',
