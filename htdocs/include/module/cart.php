@@ -61,17 +61,13 @@ class module_cart extends module
     protected function action_delete()
     {
         cart::factory()->delete(id());
-        
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-        exit;
+        redirect_back();
     }
     
     protected function action_clear()
     {
         cart::factory()->clear();
-        
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-        exit;
+        redirect_back();
     }
     
     // Отключаем кеширование
