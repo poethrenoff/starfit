@@ -9,7 +9,7 @@
 								<div class="field">
 									E-mail <span class="require">*</span>:
 									<br />
-									<input type="text" class="input" name="email" value="<?= h($this->from_request('email')) ?>" />
+									<input type="text" class="input" name="email" value="<?= $this->escape($this->from_request('email')) ?>" />
 <? if ($this->error['email']) { ?>
 									<span class="require"><?= $this->error['email'] ?></span>
 <? } ?>
@@ -17,7 +17,7 @@
 								<div class="field">
 									Ваше имя, фамилия, отчество <span class="require">*</span>:
 									<br />
-									<input type="text" class="input" name="person" value="<?= h($this->from_request('person')) ?>" />
+									<input type="text" class="input" name="person" value="<?= $this->escape($this->from_request('person')) ?>" />
 <? if ($this->error['person']) { ?>
 									<span class="require"><?= $this->error['person'] ?></span>
 <? } ?>
@@ -25,7 +25,7 @@
 								<div class="field">
 									Название компании (для юрлиц):
 									<br />
-									<input type="text" class="input" name="name" value="<?= h($this->from_request('name')) ?>" />
+									<input type="text" class="input" name="name" value="<?= $this->escape($this->from_request('name')) ?>" />
 <? if ($this->error['name']) { ?>
 									<span class="require"><?= $this->error['name'] ?></span>
 <? } ?>
@@ -46,7 +46,7 @@
 								<div class="field">
 									Телефон (для юрлиц обязательно):
 									<br />
-									<input type="text" class="input" name="phone" value="<?= h($this->from_request('phone')) ?>" />
+									<input type="text" class="input" name="phone" value="<?= $this->escape($this->from_request('phone')) ?>" />
 <? if ($this->error['phone']) { ?>
 									<span class="require"><?= $this->error['phone'] ?></span>
 <? } ?>
@@ -54,7 +54,7 @@
 								<div class="field">
 									Факс (для юрлиц обязательно):
 									<br />
-									<input type="text" class="input" name="fax" value="<?= h($this->from_request('fax')) ?>" />
+									<input type="text" class="input" name="fax" value="<?= $this->escape($this->from_request('fax')) ?>" />
 <? if ($this->error['fax']) { ?>
 									<span class="require"><?= $this->error['fax'] ?></span>
 <? } ?>
