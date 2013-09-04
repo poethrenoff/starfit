@@ -24,12 +24,12 @@ class model
     public function __construct($object)
     {
         if (!isset(metadata::$objects[$object])) {
-            throw new Exception('Ошибка. Объект не описан в метаданных.', true);
+            throw new AlarmException('Ошибка. Объект не описан в метаданных.');
         }
         
         $object_desc = metadata::$objects[$object];
         if (!(isset($object_desc['fields']) && $object_desc['fields'])) {
-            throw new Exception('Ошибка. Объект не является таблицей.', true);
+            throw new AlarmException('Ошибка. Объект не является таблицей.');
         }
         $this->object = $object;
         $this->fields_desc = $object_desc['fields'];
@@ -40,17 +40,17 @@ class model
             }
         }
         if (!$this->primary_field) {
-            throw new Exception('Ошибка в описании таблицы "' . $object . '". Отсутствует ключевое поле.', true);
+            throw new AlarmException('Ошибка в описании таблицы "' . $object . '". Отсутствует ключевое поле.');
         }
     }
 
     // Диспетчер неявных аксессоров
     public function __call($method, $vars) {
         if (!preg_match("/^(get|set)_(\w+)/", $method, $matches)) {
-            throw new Exception("Ошибка. Метод " . get_called_class() . "::{$method}() не найден.", true);
+            throw new AlarmException("Ошибка. Метод " . get_called_class() . "::{$method}() не найден.");
         }
         if (!(isset($this->fields_desc[$matches[2]]) && is_array($this->fields_desc[$matches[2]]))) {
-            throw new Exception("Ошибка. Поле {$this->object}->{$matches[2]} не описано в метаданных.", true);
+            throw new AlarmException("Ошибка. Поле {$this->object}->{$matches[2]} не описано в метаданных.");
         }
         
         $field_name = $matches[2]; $field_desc = $this->fields_desc[$field_name];
@@ -87,7 +87,7 @@ class model
                     array($this->primary_field => $primary_field)
                );
                 if (!$record){
-                    throw new Exception("Ошибка. Запись {$this->object}({$primary_field}) не найдена.");
+                    throw new AlarmException("Ошибка. Запись {$this->object}({$primary_field}) не найдена.");
                 }
             }
             foreach ($this->fields_desc as $field_name => $field_desc) {
@@ -99,7 +99,7 @@ class model
         return $this;
     }
 
-    // Получние списка объектов
+    // Получение списка объектов
     public function get_batch(&$records = array()) {
         $objects = array();
         foreach ($records as $record) {
@@ -129,7 +129,7 @@ class model
     }
     
     // Получение условия ограничения количества записей
-    protected function get_limit_clause($limit = 0, $offset = 0) {
+    protected function get_limit_clause($limit = null, $offset = null) {
         $limit_clause = '';
         if (isset($limit)) {
             $limit_clause .= 'limit ' . $limit;
@@ -143,7 +143,7 @@ class model
     // Получение количества объектов
     public function get_count($where = array()) {
         list($filter_clause, $filter_binds) = $this->get_filter_condition($where);
-        return db::select_cell("select count(*) from {$this->object}" . $filter_clause, $filter_binds);
+        return db::select_cell("select count(*) from {$this->object} {$filter_clause}", $filter_binds);
     }
 
     // Получение списка объектов
@@ -170,7 +170,7 @@ class model
                 $field = field::factory($field_desc['type']);
                 $errors_string = isset($field_desc['errors']) && $field_desc['errors'] ? $field_desc['errors'] : null;
                 if (!$field->check($record[$field_name], $errors_string)) {
-                    throw new Exception('Ошибочное значение поля "' . $field_desc['title'] . '".', true);
+                    throw new AlarmException('Ошибочное значение поля "' . $field_desc['title'] . '".');
                 }
             }
         }
@@ -186,7 +186,7 @@ class model
     // Удаление объекта из БД
     public function delete() {
         if($this->is_new){
-            throw new Exception("Ошибка. Запись не можеть быть удалена из БД, так как не имеет идентификатора.");
+            throw new AlarmException("Ошибка. Запись не можеть быть удалена из БД, так как не имеет идентификатора.");
         }
         db::delete($this->object, array($this->primary_field => $this->get_id()));
         self::purge($this->object, $this->primary_field);
@@ -195,11 +195,16 @@ class model
     // Получение идентификатора объекта
     public function get_id() {
         if($this->is_new){
-            throw new Exception("Ошибка. Запись не была сохранена в БД, поэтому не имеет идентификатора.");
+            throw new AlarmException("Ошибка. Запись не была сохранена в БД, поэтому не имеет идентификатора.");
         }
         return $this->fields[$this->primary_field];
     }
-    
+
+    // Получение поля с идентификатором первичного ключа
+    public function get_primary_field() {
+        return $this->primary_field;
+    }
+
     // Очистка кеша объектов
     public static function purge($object = null, $primary_field = null) {
         if (!is_null($object) && !is_null($primary_field)) {

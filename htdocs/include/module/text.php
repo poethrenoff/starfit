@@ -8,7 +8,7 @@ class module_text extends module
         
         try {
             $text_item = model::factory('text')->get($this->get_param('id'));
-        } catch (Exception $e) {
+        } catch (AlarmException $e) {
             not_found();
         }
         
