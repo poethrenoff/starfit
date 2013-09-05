@@ -2,7 +2,7 @@
 class module_subscribe extends module
 {
     public $type_list = array(
-        '1' => 'Оптовая', '2' => 'Родничная',
+        '1' => 'Оптовая', '2' => 'Розничная',
     );
     
     protected function action_index()
