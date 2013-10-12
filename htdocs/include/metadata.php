@@ -100,6 +100,7 @@ class metadata
          */
         'product' => array(
             'title' => 'Товары',
+            'class' => 'product',
             'fields' => array(
                 'product_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
                 'product_catalogue' => array( 'title' => 'Каталог', 'type' => 'table', 'table' => 'catalogue', 'errors' => 'require' ),
@@ -177,6 +178,19 @@ class metadata
                 'item_quantity' => array('title' => 'Количество', 'type' => 'int', 'show' => 1, 'errors' => 'require')
             )
         ),
+        
+        'meta' => array(
+            'title' => 'Метатеги',
+            'internal' => true,
+            'fields' => array(
+                'meta_id' => array( 'title' => 'Идентификатор', 'type' => 'int' ),
+                'meta_object' => array('title' => 'Объект', 'type' => 'select', 'values' => '__OBJECT__' ),
+                'meta_title' => array( 'title' => 'Заголовок', 'type' => 'string' ),
+                'meta_keywords' => array( 'title' => 'Ключевые слова', 'type' => 'text' ),
+                'meta_description' => array( 'title' => 'Описание', 'type' => 'text' ),
+            )
+        ),
+        
         
         ////////////////////////////////////////////////////////////////////////////////////////
         

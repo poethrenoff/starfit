@@ -1,5 +1,5 @@
 <?php
-class admin_table_article extends admin_table
+class admin_table_article extends admin_table_meta
 {
     protected function action_add_save( $redirect = true )
     {

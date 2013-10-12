@@ -54,6 +54,17 @@ class module_product extends module
             $this->view->assign('product_list', $product_list);
             $this->content = $this->view->fetch('module/product/product');
         }
+        
+        $meta = meta::factory('catalogue')->get($catalogue_id);
+        if ($meta->get_meta_title()) {
+            $this->output['meta_title'] = $meta->get_meta_title();
+        }
+        if ($meta->get_meta_keywords()) {
+            $this->output['meta_keywords'] = $meta->get_meta_keywords();
+        }
+        if ($meta->get_meta_description()) {
+            $this->output['meta_description'] = $meta->get_meta_description();
+        }
     }
     
     protected function action_item()
@@ -77,6 +88,11 @@ class module_product extends module
         
         $this->view->assign($product);
         $this->content = $this->view->fetch('module/product/item');
+        
+        $meta = meta::factory('product')->get(id());
+        $this->output['meta_title'] = $meta->get_meta_title() ?: $product->get_product_title();
+        $this->output['meta_keywords'] = $meta->get_meta_keywords() ?: $product->get_product_title();
+        $this->output['meta_description'] = $meta->get_meta_description() ?: $product->get_product_title();
     }
     
     protected function action_menu()

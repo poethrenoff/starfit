@@ -47,6 +47,17 @@ class module_article extends module
         
         $this->view->assign($article);
         $this->content = $this->view->fetch('module/article/item');
+        
+        $meta = meta::factory('article')->get($article->get_id());
+        if ($meta->get_meta_title()) {
+            $this->output['meta_title'] = $meta->get_meta_title();
+        }
+        if ($meta->get_meta_keywords()) {
+            $this->output['meta_keywords'] = $meta->get_meta_keywords();
+        }
+        if ($meta->get_meta_description()) {
+            $this->output['meta_description'] = $meta->get_meta_description();
+        }
     }
     
     ////////////////////////////////////////////////////////////////////////////////////////////////
