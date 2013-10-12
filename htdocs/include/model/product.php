@@ -11,8 +11,7 @@ class model_product extends model
     public function get_product_url()
     {
         return url_for(array('controller' => 'product',
-            'catalogue' => $this->get_product_catalogue(),
-            'action' => 'item', 'id' => $this->get_id()));
+            'catalogue' => $this->get_catalogue()->get_catalogue_name(), 'action' => 'item', 'id' => $this->get_id()));
     }
     
     // Возвращает список маеркеров товара

@@ -36,9 +36,11 @@ class metadata
          */
         'article' => array(
             'title' => 'Статьи',
+            'class' => 'article',
             'fields' => array(
                 'article_id' => array('title' => 'Идентификатор', 'type' => 'pk'),
                 'article_title' => array('title' => 'Заголовок', 'type' => 'string', 'show' => 1, 'main' => 1, 'errors' => 'require'),
+                'article_name' => array( 'title' => 'Ссылка', 'type' => 'string', 'errors' => 'require', 'no_add' => 1 ),
                 'article_content' => array('title' => 'Текст', 'type' => 'text', 'editor' => 1, 'errors' => 'require'),
                 'article_order' => array('title' => 'Порядок', 'type' => 'order'),
                 'article_active' => array('title' => 'Видимость', 'type' => 'active'),
@@ -77,11 +79,13 @@ class metadata
          */
         'catalogue' => array(
             'title' => 'Каталог',
+            'class' => 'catalogue',
             'fields' => array(
                 'catalogue_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
                 'catalogue_parent' => array( 'title' => 'Родительский раздел', 'type' => 'parent' ),
                 'catalogue_title' => array( 'title' => 'Название', 'type' => 'string', 'show' => 1, 'main' => 1, 'errors' => 'require' ),
                 'catalogue_short_title' => array( 'title' => 'Краткое название', 'type' => 'string', 'errors' => 'require' ),
+                'catalogue_name' => array( 'title' => 'Ссылка', 'type' => 'string', 'errors' => 'require', 'no_add' => 1 ),
                 'catalogue_description' => array( 'title' => 'Описание', 'type' => 'text', 'editor' => 1 ),
                 'catalogue_order' => array( 'title' => 'Порядок', 'type' => 'order', 'group' => array( 'catalogue_parent' ) ),
                 'catalogue_active' => array( 'title' => 'Видимость', 'type' => 'active' ),

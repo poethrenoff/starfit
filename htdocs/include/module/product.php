@@ -3,32 +3,51 @@ class module_product extends module
 {
     protected function action_index()
     {
+        $catalogue_id = 0;
+        $catalogue_name = get_param('catalogue');
+        
+        if ($catalogue_name) {
+            if (is_numeric($catalogue_name)) {
+                try {
+                    $catalogue = model::factory('catalogue')->get($catalogue_name);
+                    
+                    header('HTTP/1.1 301 Moved Permanently');
+                    header('Location: '  . $catalogue->get_catalogue_url());
+                    exit;
+                } catch (AlarmException $e) {
+                    not_found();
+                }
+            } else {
+                try {
+                    $catalogue = model::factory('catalogue')->get_by_name($catalogue_name);
+                } catch (AlarmException $e) {
+                    not_found();
+                }
+                
+                if (!$catalogue->get_catalogue_active()) {
+                    not_found();
+                }
+                
+                $catalogue_id = $catalogue->get_id();
+            }
+        }
+        
         $catalogue_list = model::factory('catalogue')->get_list(
-            array('catalogue_active' => 1, 'catalogue_parent' => id()), array('catalogue_order' => 'asc')
+            array('catalogue_active' => 1, 'catalogue_parent' => $catalogue_id), array('catalogue_order' => 'asc')
         );
         
         if (count($catalogue_list)) {
             $catalogue_tree = model::factory('catalogue')->get_tree(
                 model::factory('catalogue')->get_list(
                     array('catalogue_active' => 1), array('catalogue_order' => 'asc')
-                ), id()
+                ), $catalogue_id
             );
             
             $this->view->assign($catalogue_tree);
             $this->content = $this->view->fetch('module/product/catalogue');
         } else {
-            try {
-                $catalogue = model::factory('catalogue')->get(id());
-            } catch (Exception $e) {
-                not_found();
-            }
-            
-            if (!$catalogue->get_catalogue_active()) {
-                not_found();
-            }
-            
             $product_list = model::factory('product')->get_list(
-                array('product_active' => 1, 'product_catalogue' => id()), array('product_order' => 'asc')
+                array('product_active' => 1, 'product_catalogue' => $catalogue_id), array('product_order' => 'asc')
             );
             
             $this->view->assign('catalogue', $catalogue);
@@ -41,12 +60,19 @@ class module_product extends module
     {
         try {
             $product = model::factory('product')->get(id());
-        } catch (Exception $e) {
+        } catch (AlarmException $e) {
             not_found();
         }
         
         if (!$product->get_product_active()) {
             not_found();
+        }
+        
+        $catalogue_name = get_param('catalogue');
+        if (is_numeric($catalogue_name)) {
+            header('HTTP/1.1 301 Moved Permanently');
+            header('Location: '  . $product->get_product_url());
+            exit;
         }
         
         $this->view->assign($product);
@@ -87,8 +113,9 @@ class module_product extends module
     // Дополнительные параметры хэша модуля
     protected function ext_cache_key()
     {
+        $catalogue_name = get_param('catalogue');
         return parent::ext_cache_key() + (
-            id() && in_array($this->action, array('index', 'item')) ? array('_id' => id()
+            $catalogue_name && in_array($this->action, array('index', 'item')) ? array('_name' => $catalogue_name
         ) : array());
     }
 }

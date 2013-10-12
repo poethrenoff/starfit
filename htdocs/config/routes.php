@@ -4,15 +4,22 @@
      */
     $routes = array(
         // Путь к статьям
-        '/article/@id' => array(
+        '/article/@article' => array(
             'controller' => 'article',
+            'article' => '\w+',
             'action' => 'item',
+        ),
+        
+        // Путь к каталогу
+        '/product/@catalogue' => array(
+            'controller' => 'product',
+            'catalogue' => '\w+',
         ),
         
         // Путь к товару
         '/product/@catalogue/@id' => array(
             'controller' => 'product',
-            'catalogue' => '\d+',
+            'catalogue' => '\w+',
             'action' => 'item',
         ),
    );
