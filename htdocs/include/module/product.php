@@ -46,11 +46,15 @@ class module_product extends module
             $this->view->assign($catalogue_tree);
             $this->content = $this->view->fetch('module/product/catalogue');
         } else {
+            $filter_list = model::factory('filter')->get_list(
+                array('filter_catalogue' => $catalogue_id), array('filter_order' => 'asc')
+            );
             $product_list = model::factory('product')->get_list(
                 array('product_active' => 1, 'product_catalogue' => $catalogue_id), array('product_order' => 'asc')
             );
             
             $this->view->assign('catalogue', $catalogue);
+            $this->view->assign('filter_list', $filter_list);
             $this->view->assign('product_list', $product_list);
             $this->content = $this->view->fetch('module/product/product');
         }
@@ -64,6 +68,41 @@ class module_product extends module
         }
         if ($meta->get_meta_description()) {
             $this->output['meta_description'] = $meta->get_meta_description();
+        }
+    }
+    protected function action_filter()
+    {
+        $catalogue_name = get_param('catalogue');
+        $filter_name = get_param('filter');
+        
+        try {
+            $catalogue = model::factory('catalogue')->get_by_name($catalogue_name);
+            $filter = model::factory('filter')->get_by_name($catalogue, $filter_name);
+        } catch (AlarmException $e) {
+            not_found();
+        }
+        
+        $filter_list = model::factory('filter')->get_list(
+            array('filter_catalogue' => $catalogue->get_id()), array('filter_order' => 'asc')
+        );
+        $product_list = model::factory('product')->get_by_filter($filter);
+        
+        $this->view->assign('catalogue', $catalogue);
+        $this->view->assign('filter', $filter);
+        $this->view->assign('filter_list', $filter_list);
+        $this->view->assign('product_list', $product_list);
+        $this->content = $this->view->fetch('module/product/product');
+        
+        $meta_catalogue = meta::factory('catalogue')->get($catalogue->get_id());
+        $meta_filter = meta::factory('filter')->get($filter->get_id());
+        if ($meta_catalogue->get_meta_title() || $meta_filter->get_meta_title()) {
+            $this->output['meta_title'] = $meta_filter->get_meta_title() ?: $meta_catalogue->get_meta_title();
+        }
+        if ($meta_catalogue->get_meta_keywords() || $meta_filter->get_meta_keywords()) {
+            $this->output['meta_keywords'] = $meta_filter->get_meta_keywords() ?: $meta_catalogue->get_meta_keywords();
+        }
+        if ($meta_catalogue->get_meta_description() || $meta_filter->get_meta_description()) {
+            $this->output['meta_description'] = $meta_filter->get_meta_description() ?: $meta_catalogue->get_mmeta_description();
         }
     }
     
@@ -130,8 +169,9 @@ class module_product extends module
     protected function ext_cache_key()
     {
         $catalogue_name = get_param('catalogue');
+        $filter_name = get_param('filter');
         return parent::ext_cache_key() + (
-            $catalogue_name && in_array($this->action, array('index', 'item')) ? array('_name' => $catalogue_name
-        ) : array());
+            $catalogue_name && in_array($this->action, array('index', 'filter', 'item')) ?
+                array('_name' => $catalogue_name, '_filter' => $filter_name) : array());
     }
 }

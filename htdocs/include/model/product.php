@@ -14,7 +14,7 @@ class model_product extends model
             'catalogue' => $this->get_catalogue()->get_catalogue_name(), 'action' => 'item', 'id' => $this->get_id()));
     }
     
-    // Возвращает список маеркеров товара
+    // Возвращает список маркеров товара
     public function get_marker_list()
     {
         return model::factory('marker')->get_by_product($this);
@@ -31,6 +31,21 @@ class model_product extends model
                 product_active = :product_active and catalogue_active = :catalogue_active
             order by rand() limit ' . $limit,
             array('marker_id' => $marker->get_id(), 'product_active' => 1, 'catalogue_active' => 1));
+        
+        return $this->get_batch($records);
+    }
+    
+    // Возвращает список товаров по фильтру
+    public function get_by_filter($filter)
+    {
+        $records = db::select_all('
+            select product.* from product
+                inner join catalogue on product_catalogue = catalogue_id
+                inner join product_filter using(product_id)
+            where filter_id = :filter_id and
+                product_active = :product_active and catalogue_active = :catalogue_active
+            order by product_order',
+            array('filter_id' => $filter->get_id(), 'product_active' => 1, 'catalogue_active' => 1));
         
         return $this->get_batch($records);
     }

@@ -593,6 +593,20 @@ textarea.input {
     padding:2px 0;
 }
 
+.b-content .right .filter {
+    margin-bottom: 15px;
+}
+
+.b-content .right .filter a {
+    margin-left: 10px;
+}
+
+.b-content .right .filter a.selected {
+    color: #a3235a;
+    text-decoration: none;    
+    font-weight: bold;
+}
+
 .b-news {
     overflow: hidden;
 }

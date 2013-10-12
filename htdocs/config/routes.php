@@ -22,4 +22,12 @@
             'catalogue' => '\w+',
             'action' => 'item',
         ),
+        
+        // Путь к фильтру
+        '/product/@catalogue/@filter' => array(
+            'controller' => 'product',
+            'catalogue' => '\w+',
+            'filter' => '\w+',
+            'action' => 'filter',
+        ),
    );

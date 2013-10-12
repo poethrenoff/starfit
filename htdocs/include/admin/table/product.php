@@ -32,4 +32,32 @@ class admin_table_product extends admin_table_meta
         
         return $primary_field;
     }
+    
+    protected function get_record_relations($record)
+    {
+        $relations = parent::get_record_relations($record);
+        
+        $product = model::factory('product')->get($record[$this->primary_field]);
+        $relations['filter']['url'] = url_for(array('object' => $this->object, 'action' => 'relation', 'relation' => 'filter',
+            'id' => $record[$this->primary_field], 'filter_catalogue' => $product->get_product_catalogue()));
+        
+        return $relations;
+    }
+    
+    
+    protected function action_relation()
+    {
+        $relation_name = init_string('relation');
+        if ($relation_name == 'filter' ) {
+            $filter_catalogue = init_string('filter_catalogue');
+            if (!$filter_catalogue) {
+                $record = $this->get_record();
+                $primary_field = $record[$this->primary_field];
+                $product = model::factory('product')->get($primary_field);
+                $_REQUEST['filter_catalogue'] = $product->get_product_catalogue();
+            }
+        }
+        
+        parent::action_relation();
+    }
 }

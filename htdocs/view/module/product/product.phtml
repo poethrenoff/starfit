@@ -1,5 +1,14 @@
 							<div class="block first">
 								<h1 class="line"><i></i><?= $this->catalogue->get_catalogue_title() ?></h1>
+<? if ($this->filter_list) { ?>
+								<div class="filter">
+									Показать только:
+<? 		foreach ($this->filter_list as $filter_item) { ?>
+									<a href="<?= $filter_item->get_filter_url() ?>"<? if ($this->filter && $filter_item->get_id() == $this->filter->get_id()) { ?> class="selected"<? } ?>><?= $filter_item->get_filter_title() ?></a>
+<? 		} ?>
+								</div>
+<? } ?>
+								
 								<div class="catalog">
 <? foreach ($this->product_list as $product_item) { ?>
 									<div class="item">
@@ -36,9 +45,9 @@
 									</div>
 <? } ?>
 								</div>
-<? if ($this->catalogue->get_catalogue_description()) { ?>
-								<div>
+<? if ($this->filter && $this->filter->get_filter_description()) { ?>
+<?= $this->filter->get_filter_description() ?>
+<? } elseif ($this->catalogue->get_catalogue_description()) { ?>
 <?= $this->catalogue->get_catalogue_description() ?>
-								</div>
 <? } ?>
 							</div>
