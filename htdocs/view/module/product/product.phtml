@@ -36,4 +36,9 @@
 									</div>
 <? } ?>
 								</div>
+<? if ($this->catalogue->get_catalogue_description()) { ?>
+								<div>
+<?= $this->catalogue->get_catalogue_description() ?>
+								</div>
+<? } ?>
 							</div>

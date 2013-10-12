@@ -82,6 +82,7 @@ class metadata
                 'catalogue_parent' => array( 'title' => 'Родительский раздел', 'type' => 'parent' ),
                 'catalogue_title' => array( 'title' => 'Название', 'type' => 'string', 'show' => 1, 'main' => 1, 'errors' => 'require' ),
                 'catalogue_short_title' => array( 'title' => 'Краткое название', 'type' => 'string', 'errors' => 'require' ),
+                'catalogue_description' => array( 'title' => 'Описание', 'type' => 'text', 'editor' => 1 ),
                 'catalogue_order' => array( 'title' => 'Порядок', 'type' => 'order', 'group' => array( 'catalogue_parent' ) ),
                 'catalogue_active' => array( 'title' => 'Видимость', 'type' => 'active' ),
               ),
