@@ -102,7 +102,7 @@ class module_product extends module
             $this->output['meta_keywords'] = $meta_filter->get_meta_keywords() ?: $meta_catalogue->get_meta_keywords();
         }
         if ($meta_catalogue->get_meta_description() || $meta_filter->get_meta_description()) {
-            $this->output['meta_description'] = $meta_filter->get_meta_description() ?: $meta_catalogue->get_mmeta_description();
+            $this->output['meta_description'] = $meta_filter->get_meta_description() ?: $meta_catalogue->get_meta_description();
         }
     }
     
