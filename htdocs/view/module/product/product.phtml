@@ -1,6 +1,8 @@
 							<div class="block first">
 								<h1 class="line h1"><i></i><? 
-								if($this->catalogue->get_catalogue_short_title()){
+								if($this->filter && $this->filter->get_filter_header()){
+									echo $this->filter->get_filter_header();
+								}elseif($this->catalogue->get_catalogue_short_title()){
 									echo $this->catalogue->get_catalogue_short_title(); 
 								}else{
 									echo $this->catalogue->get_catalogue_title();

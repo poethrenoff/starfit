@@ -162,6 +162,7 @@ class metadata
                 'filter_catalogue' => array( 'title' => 'Каталог', 'type' => 'table', 'table' => 'catalogue', 'errors' => 'require' ),
                 'filter_title' => array( 'title' => 'Название', 'type' => 'string', 'show' => 1, 'main' => 1, 'errors' => 'require' ),
                 'filter_name' => array( 'title' => 'Ссылка', 'type' => 'string', 'errors' => 'require', 'no_add' => 1, 'group' => array( 'filter_catalogue' ) ),
+                'filter_header' => array( 'title' => 'Заголовок', 'type' => 'string' ),
                 'filter_description' => array( 'title' => 'Описание', 'type' => 'text', 'editor' => 1 ),
                 'filter_order' => array( 'title' => 'Порядок', 'type' => 'order', 'group' => array( 'filter_catalogue' ) ),
             ),
