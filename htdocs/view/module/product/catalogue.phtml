@@ -1,8 +1,20 @@
 							 <div class="block first">
-								<h1><i></i><?= $this->get_catalogue_title() ?: 'Продукция' ?></h1>
-<? foreach ($this->get_children() as $catalogue_item) { ?>
-								<div class="catalog-link"><a href="<?= $catalogue_item->get_catalogue_url() ?>"><?= $catalogue_item->get_catalogue_title() ?></a></div>
-<? } ?>
+								<h1 class="line h1"><i></i><?= $this->get_catalogue_title() ?: 'Продукция' ?></h1>
 								<div class="catalog">
+<? foreach ($this->get_children() as $catalogue_item) { ?>
+									<div class="item" style="width: 200px;">
+										<div class="wrap">
+											<div class="name">
+												<a href="<?= $catalogue_item->get_catalogue_url() ?>"><?= $catalogue_item->get_catalogue_title() ?></a>
+											</div>
+											<div class="info" style="padding: 0px 0px 20px 0px;">
+												<div class="photo" style="width: 180px;">
+													<img src="<?= $catalogue_item->get_catalogue_image() ?>" class="image" style="max-width: 130px; max-height: 130px;">
+												</div>
+												<div class="clearfix"></div>
+											</div>
+										</div>
+									</div>
+<? } ?>
 								</div>
 							</div>

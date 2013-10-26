@@ -87,6 +87,7 @@ class metadata
                 'catalogue_short_title' => array( 'title' => 'Краткое название', 'type' => 'string', 'errors' => 'require' ),
                 'catalogue_name' => array( 'title' => 'Ссылка', 'type' => 'string', 'errors' => 'require', 'no_add' => 1, 'group' => array() ),
                 'catalogue_description' => array( 'title' => 'Описание', 'type' => 'text', 'editor' => 1 ),
+                'catalogue_image' => array( 'title' => 'Изображение', 'type' => 'image', 'upload_dir' => 'catalogue' ),
                 'catalogue_order' => array( 'title' => 'Порядок', 'type' => 'order', 'group' => array( 'catalogue_parent' ) ),
                 'catalogue_active' => array( 'title' => 'Видимость', 'type' => 'active' ),
             ),
