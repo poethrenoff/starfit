@@ -134,6 +134,25 @@ class module_product extends module
         $this->output['meta_description'] = $meta->get_meta_description() ?: $product->get_product_title();
     }
     
+    protected function action_vote()
+    {
+        try {
+            $product = model::factory('product')->get(id());
+        } catch (AlarmException $e) {
+            not_found();
+        }
+        
+        if (!$product->get_product_active()) {
+            not_found();
+        }
+        
+        $product->add_mark(min(5, max(1, init_string('mark'))))->save();
+        
+        $this->content = json_encode(
+            array('rating' => $product->get_product_rating())
+        );
+    }
+    
     protected function action_menu()
     {
         $catalogue_tree = model::factory('catalogue')->get_tree(

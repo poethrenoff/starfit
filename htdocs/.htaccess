@@ -21,8 +21,11 @@ php_value iconv.internal_encoding "utf-8"
 php_value iconv.output_encoding "utf-8"
 
 RewriteEngine On
-
+RewriteCond %{HTTP_HOST} ^www.starfit.ru$ [NC]
+RewriteRule ^(.*)$ http://starfit.ru/$1 [R=301,L]
 RewriteRule ^favicon.ico image/favicon.ico [L]
+
+RewriteRule ^(upload/.+\.(gif|jpg|jpe|jpeg|png))/(c|r)/(\d+)/(\d+)$ image/image.php?url=/$1&method=$3&width=$4&height=$5 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php [QSA,L]

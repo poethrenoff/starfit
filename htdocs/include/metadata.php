@@ -132,6 +132,9 @@ class metadata
                 'product_image' => array( 'title' => 'Изображение', 'type' => 'image', 'upload_dir' => 'image', 'errors' => 'require' ),
                 'product_instruction' => array( 'title' => 'Инструкция', 'type' => 'file', 'upload_dir' => 'instruction'),
                 'product_stock' => array( 'title' => 'Наличие', 'type' => 'boolean'),
+                'product_rating' => array( 'title' => 'Рейтинг', 'type' => 'float', 'no_add' => true),
+                'product_voters' => array( 'title' => 'Количество голосов', 'type' => 'int', 'no_add' => true),
+                'product_stock' => array( 'title' => 'Наличие', 'type' => 'boolean'),
                 'product_order' => array( 'title' => 'Порядок', 'type' => 'order', 'group' => array( 'product_catalogue' ) ),
                 'product_active' => array( 'title' => 'Видимость', 'type' => 'active' ),
             ),
@@ -172,7 +175,7 @@ class metadata
                 'picture_order' => array( 'title' => 'Порядок', 'type' => 'order', 'group' => array( 'picture_product' ) ),
             )
         ),
-                
+        
         /**
          * Таблица "Маркеры"
          */

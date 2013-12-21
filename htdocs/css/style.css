@@ -575,12 +575,13 @@ textarea.input {
     text-align: right;
     margin-top: 40px;
 }
-    .b-content .right .catalog.marker .item .wrap .info .price-container{
-        position: absolute;
-        width: 190px;
-        margin-left: 0px;
-        margin-top: 75px;
-    }
+
+.b-content .right .catalog.marker .item .wrap .info .price-container{
+    position: absolute;
+    width: 190px;
+    margin-left: 0px;
+    margin-top: 75px;
+}
 
 .b-content .right .catalog .item .wrap .info .price-container .old-price{
     font-size:14px;
@@ -719,34 +720,135 @@ textarea.input {
 }
 
 .b-catalog-item .info .price-container{
-    margin-left:430px;
+    position: absolute;
+    margin-left: 270px;
+    width: 396px;
+    height: 165px;
+    background: url(/image/card-bg.png) no-repeat right top;
 }
 
 .b-catalog-item .info .price-container .old-price{
-    font-size:14px;
-    height: 20px;
-    color:#999999;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 27px;
+    font-size: 15px;
+    color: #A00000;
     text-decoration: line-through;
-    padding:2px 0;
 }
 
 .b-catalog-item .info .price-container .price{
-    font-size:24px;
-    padding:2px 0;
+    position: absolute;
+    margin-top: 32px;
+    margin-left: 27px;
+    font-size: 28px;
+    color: #659D4B;
+}
+
+.b-catalog-item .info .price-container .button{
+    position: absolute;
+    margin-top: 115px;
+    margin-left: 253px;
+}
+
+.b-catalog-item .info .price-container .brand{
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 250px;
 }
 
 .b-catalog-item .info .price-container .in-basket{
-    margin-top:15px;
+    position: absolute;
+    margin-top:5px;
+    margin-left: -40px;
     border:1px solid #76B02C;
     background: #efefef;
-    padding:10px;
+    padding: 10px;
     display: none;
+    width: 180px;
+    height: 35px;
 }
 
-
-.b-catalog-item .text{
-    padding-bottom: 20px;
+.b-catalog-item .info .price-container .vote{
+    position: absolute;
+    margin-top: 65px;
+    margin-left: 30px;
+    width: 100px;
+    height: 20px;
+    cursor: default;
 }
+
+.b-catalog-item .info .price-container .vote .star{
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    background: url(/image/stars.png) 13px 0px;
+}
+
+.b-catalog-item .info .price-container .vote .star.active{
+    background: url(/image/stars.png) 0px 0px;
+}
+
+.b-catalog-item .info .price-container .stock{
+    position: absolute;
+    margin-top: 130px;
+    margin-left: 30px;
+    padding-left: 23px;
+    padding-top: 7px;
+    height: 20px;
+    background: url(/image/available.png) no-repeat left center;
+}
+
+.b-catalog-item .info .picture-container{
+    position: absolute;
+    margin-left: 286px;
+    margin-top: 175px;
+    width: 396px;
+    text-align: left;
+}
+
+.b-catalog-item .info .picture-container img{
+    border: 1px solid #C0C0C0;
+    width: 85px;
+    height: 85px;
+    margin-right: 10px;
+}
+
+.description{
+    border: 1px solid #80BA2B;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.description .title{
+    display: inline-block;
+    position: absolute;
+    margin-top: -33px;
+    background: url(/image/green_hren.png) no-repeat left center;
+    text-transform: uppercase;
+    color: #ffffff;
+    width: 200px;
+    padding-left: 10px;
+    height: 20px;
+    padding-top: 5px;
+}
+
+.description .property_table{
+    width: 100%;
+    margin: 20px 0px 20px 0px;
+    border-collapse: collapse;
+}
+
+.description .property_table td{
+    padding: 5px;
+    padding-left: 0px;
+}
+.description .property_table td.name{
+    width: 300px;
+}
+.description .property_table td.value{
+    color: #000000;
+}
+
 
 .b-order table.items .image{
     width:50px;

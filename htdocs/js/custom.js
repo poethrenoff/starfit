@@ -43,7 +43,7 @@ function buyItem(id){
             .clone()  
             .css({
                 'position' : 'absolute', 
-                'z-index' : '100',
+                'z-index' : '5000',
                 'top':start_t,
                 'left':start_l,
                 'width':width

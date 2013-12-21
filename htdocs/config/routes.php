@@ -16,6 +16,12 @@
             'catalogue' => '\w+',
         ),
         
+        // Путь для голосования
+        '/product/vote/@id' => array(
+            'controller' => 'product',
+            'action' => 'vote',
+        ),
+        
         // Путь к товару
         '/product/@catalogue/@id' => array(
             'controller' => 'product',

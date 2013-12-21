@@ -20,6 +20,25 @@
 										hideOnMouseOut: true
 									} 
 								});
+								
+								function setMark(mark) {
+									$('.vote .star').removeClass('active');
+									$('.vote .star:lt(' + mark + ')').addClass('active');
+								}
+								
+								$(function(){
+									$('.vote .star').mouseenter(function(){
+										setMark($(this).attr('mark'));
+									}).click(function(){
+										$.post('/product/vote/<?= $this->get_id() ?>', {action: 'vote', mark: $(this).attr('mark')}, function(data){
+											var rating = Math.round(data.rating);
+											$('.vote').attr('rating', rating); $('.vote').mouseleave();
+										}, 'json');
+									});
+									$('.vote').mouseleave(function(){
+										setMark($(this).attr('rating'));
+									});
+								});
 							</script>
 							<div class="block first">
 								<h1><i></i><?= $this->get_product_title() ?></h1>
@@ -34,36 +53,136 @@
 <? 			} ?>
 											</div>
 <? 		} ?>
-											<a href="<?= $this->get_product_image() ?>" class="highslide " onclick="return hs.expand(this)">
+											<a href="<?= $this->get_product_image() ?>" class="highslide" onclick="return hs.expand(this)">
 												<img src="<?= $this->get_product_image() ?>" class="image" />
 											</a>
 										</div>
 										<div class="price-container">
-											<div class="old-price">
 <? if ($this->get_product_price_old()) { ?>
-												<?= $this->get_product_price_old() ?> р.
+											<div class="old-price">
+												<?= $this->get_product_price_old() ?> руб.
+											</div>
+<? } ?>
+											<div class="price">
+												<?= $this->get_product_price() ?> руб.
+											</div>
+<? if ($brand = $this->get_brand()) { ?>
+											<div class="brand">
+												Производитель:<br/>
+												<img src="<?= $brand->get_brand_image() ?>" />
+											</div>
+<? } ?>
+<? $rating = round($this->get_product_rating()); ?>
+											<div class="vote" rating="<?= $rating ?>">
+<? for ($i = 1; $i <= 5; $i++) { ?>
+												<div class="star<? if ($rating >= $i) { ?> active<? } ?>" mark="<?= $i ?>"></div>
 <? } ?>
 											</div>
-											<div class="price">
-												<?= $this->get_product_price() ?> р.
+<? if ($this->get_product_stock()) { ?>
+											<div class="stock">
+												Есть в наличии
 											</div>
-											<a href="#" onclick="buyItem(<?= $this->get_id() ?>);return false;"><img src="/image/btn-buy.png" /></a>
-											<div class="in-basket">
-												Товар отправлен в корзину.
-												<br/>
-												<a href="<?= url_for(array('controller' => 'order')) ?>">Оформить заказ?</a>
+<? } ?>
+											<div class="button">
+												<a href="#" onclick="buyItem(<?= $this->get_id() ?>);return false;"><img src="/image/btn-buy.png" /></a>
+												<div class="in-basket">
+													Товар отправлен в корзину.
+													<br/>
+													<a href="<?= url_for(array('controller' => 'order')) ?>">Оформить заказ?</a>
+												</div>
 											</div>
 										</div>
+<? if ($picture_list = $this->get_picture_list()) { ?>
+										<div class="picture-container">
+<? 		foreach ($picture_list as $picture) { ?>
+											<a href="<?= $picture->get_picture_image() ?>" class="highslide" onclick="return hs.expand(this)">
+												<img src="<?= $picture->get_picture_image() ?>/c/85/85" />
+											</a>
+<? 		} ?>
+										</div>
+<? } ?>
 										<div class="clearfix"></div>
 									</div>
-									<div class="text">
+								</div>
+								<div class="description">
+									<div class="title">
+										Описание
+									</div>
 <?= $this->get_product_description() ?>
-<? if ($this->get_product_instruction()) { ?>
-										<p>&raquo; <a href="<?= $this->get_product_instruction() ?>">Инструкция</a></p>
+
+<? if ($property_list = $this->get_property_list()) { ?>
+									<table class="property_table">
+<? 		foreach ($property_list as $property) { ?>
+										<tr>
+											<td class="name">
+												<?= $property->get_property_title() ?>
+											</td>
+											<td class="value">
+												<?= $property->get_property_value() ?><?= $property->get_property_unit() ? ' ' . $property->get_property_unit() : '' ?>
+											</td>
+										</tr>
+<? 		} ?>
+									</table>
 <? } ?>
+<? if ($this->get_product_instruction()) { ?>
+									<p>&raquo; <a href="<?= $this->get_product_instruction() ?>">Инструкция</a></p>
+<? } ?>
+								</div>
+<? if ($this->get_product_video()) { ?>
+								<div class="description">
+									<div class="title">
+										Видео
 									</div>
-									<div>
-										<a href="<?= $this->get_catalogue()->get_catalogue_url() ?>">Вернуться в раздел "<?= $this->get_catalogue()->get_catalogue_title() ?>"</a>
+									<div style="text-align: center">
+<?= $this->get_product_video() ?>
 									</div>
+								</div>
+<? } ?>
+
+<? if ($product_link_list = $this->get_product_link_list()) { ?>
+								<div class="description">
+									<div class="title">
+										C этим товаром покупают
+									</div>
+									<div class="catalog">
+<? 		foreach ($product_link_list as $product_item) { ?>
+										<div class="item">
+											<div class="wrap">
+												<div class="name">
+													<a href="<?= $product_item->get_product_url() ?>"><?= $product_item->get_product_title() ?></a>
+												</div>
+												<div class="info">
+													<div class="photo">
+<? 			$marker_list = $product_item->get_marker_list(); ?>
+<? 			if ($marker_list) { ?>
+														<div class="marker">
+<? 				foreach ($marker_list as $marker) { ?>
+															<img src="<?= $marker->get_marker_picture() ?>"><br/>
+<? 				} ?>
+														</div>
+<? 			} ?>
+														<img src="<?= $product_item->get_product_image() ?>" class="image">
+													</div>
+													<div class="price-container">
+														<div class="old-price">
+<? 			if ($product_item->get_product_price_old()) { ?>
+															<?= $product_item->get_product_price_old() ?> р.
+<? 			} ?>
+														</div>
+														<div class="price">
+															<?= $product_item->get_product_price() ?> р.
+														</div>
+														<a href="<?= $product_item->get_product_url() ?>"><img src="/image/btn-more.png"></a>
+													</div>
+													<div class="clearfix"></div>
+												</div>
+											</div>
+										</div>
+<? 		} ?>
+									</div>
+<? } ?>
+								</div>
+								<div>
+									<a href="<?= $this->get_catalogue()->get_catalogue_url() ?>">Вернуться в раздел "<?= $this->get_catalogue()->get_catalogue_title() ?>"</a>
 								</div>
 							</div>
