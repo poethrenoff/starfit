@@ -12,8 +12,10 @@ class module_article extends module
     
     protected function action_short()
     {
+        $count = max(1, intval($this->get_param('count')));
+        
         $article_list = model::factory('article')->get_list(
-            array('article_active' => 1), array('article_order' => 'asc'));
+            array('article_active' => 1), array('article_order' => 'asc'), $count);
         
         $this->view->assign('article_list', $article_list);
         $this->content = $this->view->fetch('module/article/short');
