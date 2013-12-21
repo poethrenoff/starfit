@@ -4,11 +4,13 @@
 */
 
 #teaser {
-	height:152px;
+	height:252px;
 }
 
 #slides {
-	position:absolute;
+	position:relative;
+	width: 1200px;
+    margin: 0 auto;
 	z-index:100;
 }
 
@@ -22,7 +24,6 @@
 .slides_container {
 	overflow:hidden;
 	position:relative;
-	width: 670px;
 	display:none;
 }
 
@@ -35,8 +36,8 @@
 */
 
 .slides_container a {
-	width:670px;
-	height:152px;
+	width:1200px;
+	height:252px;
 	display:block;
 }
 
@@ -51,7 +52,9 @@
 .pagination {
 	width:100px;
 	display:block;
-	position:absolute; bottom:0px; left:0px;
+	position:absolute;
+    bottom:-1px;
+    right:113px;
 	z-index:200;
 }
 

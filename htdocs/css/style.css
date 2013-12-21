@@ -467,7 +467,7 @@ textarea.input {
         padding-top:0px;
     }
 
-.b-content .right .block h1{
+.b-content .right .block h1,.b-content .right .block div.h1{
     position: relative;
     font-size:16px;
     color:#333333;
@@ -476,7 +476,9 @@ textarea.input {
     padding-bottom: 7px;
 }
 
-.b-content .right .block h1 i{
+.b-content .right .block div.h1{ margin-bottom:10px; }
+
+.b-content .right .block h1 i,.b-content .right .block div.h1 i{
     position: absolute;
     right:-26px;
     bottom:-10px;

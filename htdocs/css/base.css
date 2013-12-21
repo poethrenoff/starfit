@@ -95,6 +95,14 @@ a:hover {
     margin: 0 auto;
 }
 
+#teaser{
+    position: absolute;
+    width: 100%;
+    margin: 0 auto;
+    top: 207px;
+    height: 252px;
+}
+
 /* FOOTER */
 
 /* clearfix */

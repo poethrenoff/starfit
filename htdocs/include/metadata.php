@@ -83,6 +83,7 @@ class metadata
             'fields' => array(
                 'catalogue_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
                 'catalogue_parent' => array( 'title' => 'Родительский раздел', 'type' => 'parent' ),
+                'catalogue_type' => array( 'title' => 'Тип товара', 'type' => 'table', 'table' => 'product_type', 'errors' => 'require' ),
                 'catalogue_title' => array( 'title' => 'Название', 'type' => 'string', 'show' => 1, 'main' => 1, 'errors' => 'require' ),
                 'catalogue_short_title' => array( 'title' => 'Краткое название', 'type' => 'string', 'errors' => 'require' ),
                 'catalogue_name' => array( 'title' => 'Ссылка', 'type' => 'string', 'errors' => 'require', 'no_add' => 1, 'group' => array() ),
@@ -98,6 +99,22 @@ class metadata
         ),
         
         /**
+         * Таблица "Бренды"
+         */
+        'brand' => array(
+            'title' => 'Бренды',
+            'fields' => array(
+                'brand_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
+                'brand_title' => array( 'title' => 'Название', 'type' => 'string', 'show' => 1, 'main' => 1, 'errors' => 'require' ),
+                'brand_country' => array( 'title' => 'Страна', 'type' => 'string' ),
+                'brand_image' => array( 'title' => 'Изображение', 'type' => 'image', 'upload_dir' => 'brand' ),
+            ),
+            'links' => array(
+                'product' => array( 'table' => 'product', 'field' => 'product_brand' ),
+            ),
+        ),
+        
+        /**
          * Таблица "Товары"
          */
         'product' => array(
@@ -106,23 +123,56 @@ class metadata
             'fields' => array(
                 'product_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
                 'product_catalogue' => array( 'title' => 'Каталог', 'type' => 'table', 'table' => 'catalogue', 'errors' => 'require' ),
+                'product_brand' => array( 'title' => 'Бренд', 'type' => 'table', 'table' => 'brand' ),
                 'product_title' => array( 'title' => 'Название', 'type' => 'string', 'main' => 1, 'errors' => 'require' ),
                 'product_description' => array( 'title' => 'Описание', 'type' => 'text', 'editor' => 1, 'errors' => 'require' ),
+                'product_video' => array( 'title' => 'Видео', 'type' => 'text' ),
                 'product_price' => array( 'title' => 'Цена', 'type' => 'float', 'errors' => 'require' ),
                 'product_price_old' => array( 'title' => 'Старая цена', 'type' => 'float' ),
                 'product_image' => array( 'title' => 'Изображение', 'type' => 'image', 'upload_dir' => 'image', 'errors' => 'require' ),
                 'product_instruction' => array( 'title' => 'Инструкция', 'type' => 'file', 'upload_dir' => 'instruction'),
+                'product_stock' => array( 'title' => 'Наличие', 'type' => 'boolean'),
                 'product_order' => array( 'title' => 'Порядок', 'type' => 'order', 'group' => array( 'product_catalogue' ) ),
                 'product_active' => array( 'title' => 'Видимость', 'type' => 'active' ),
+            ),
+            'links' => array(
+                'product_picture' => array( 'table' => 'product_picture', 'field' => 'picture_product', 'title' => 'Изображения' ),
             ),
             'relations' => array(
                 'marker' => array( 'secondary_table' => 'marker', 'relation_table' => 'product_marker',
                     'primary_field' => 'product_id', 'secondary_field' => 'marker_id', 'title' => 'Маркеры' ),
                 'filter' => array( 'secondary_table' => 'filter', 'relation_table' => 'product_filter',
                     'primary_field' => 'product_id', 'secondary_field' => 'filter_id', 'title' => 'Фильтры' ),
+                'link' => array( 'secondary_table' => 'product', 'relation_table' => 'product_link',
+                    'primary_field' => 'product_id', 'secondary_field' => 'link_product_id', 'title' => 'Сопутств.' ),
             ),
         ),
         
+        /**
+         * Таблица "Сопутствующие товары"
+         */
+        'product_link' => array(
+            'title' => 'Сопутствующие товары',
+            'internal' => true,
+            'fields' => array(
+                'product_id' => array( 'title' => 'Товар', 'type' => 'table', 'table' => 'product', 'errors' => 'require' ),
+                'link_product_id' => array( 'title' => 'Товар', 'type' => 'table', 'table' => 'product', 'errors' => 'require' ),
+            ),
+        ),
+        
+        /**
+         * Таблица "Изображения товаров"
+         */
+        'product_picture' => array(
+            'title' => 'Изображения товаров',
+            'fields' => array(
+                'picture_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
+                'picture_product' => array( 'title' => 'Товар', 'type' => 'table', 'table' => 'product', 'errors' => 'require' ),
+                'picture_image' => array( 'title' => 'Изображение', 'type' => 'image', 'upload_dir' => 'image', 'main' => 1, 'errors' => 'require' ),
+                'picture_order' => array( 'title' => 'Порядок', 'type' => 'order', 'group' => array( 'picture_product' ) ),
+            )
+        ),
+                
         /**
          * Таблица "Маркеры"
          */
@@ -178,6 +228,71 @@ class metadata
             'fields' => array(
                 'product_id' => array( 'title' => 'Товар', 'type' => 'table', 'table' => 'product', 'errors' => 'require' ),
                 'filter_id' => array( 'title' => 'Фильтр', 'type' => 'table', 'table' => 'filter', 'errors' => 'require' ),
+            ),
+        ),
+        
+        /**
+         * Таблица "Типы товаров"
+         */
+        'product_type' => array(
+            'title' => 'Типы товаров',
+            'model' => 'productType',
+            'fields' => array(
+                'type_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
+                'type_title' => array( 'title' => 'Название', 'type' => 'string', 'show' => 1, 'main' => 1, 'sort' => 'asc', 'errors' => 'require' ),
+            ),
+            'links' => array(
+                'property' => array( 'table' => 'property', 'field' => 'property_type' ),
+            ),
+        ),
+        
+        /**
+         * Таблица "Свойства"
+         */
+        'property' => array(
+            'title' => 'Свойства',
+            'class' => 'property',
+            'fields' => array(
+                'property_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
+                'property_type' => array( 'title' => 'Тип товара', 'type' => 'table', 'table' => 'product_type', 'errors' => 'require' ),
+                'property_title' => array( 'title' => 'Название', 'type' => 'string', 'show' => 1, 'main' => 1, 'errors' => 'require' ),
+                'property_kind' => array( 'title' => 'Тип свойства', 'type' => 'select', 'show' => 1, 'filter' => 1, 'values' => array(
+                    array( 'value' => 'string', 'title' => 'Строка' ), 
+                    array( 'value' => 'number', 'title'  => 'Число' ),
+                    array( 'value' => 'boolean', 'title'  => 'Флаг' ),
+                    array( 'value' => 'select', 'title'  => 'Список' ) ), 'errors' => 'require' ),
+                'property_unit' => array( 'title' => 'Единица измерения', 'type' => 'string' ),
+                'property_order' => array( 'title' => 'Порядок', 'type' => 'order', 'group' => array( 'property_type' ) ),
+                'property_active' => array( 'title' => 'Видимость', 'type' => 'active' )
+            ),
+            'links' => array(
+                'property_value' => array( 'table' => 'property_value', 'field' => 'value_property', 'show' => array( 'property_kind' => array( 'select' ) ), 'ondelete' => 'cascade' ),
+            ),
+        ),
+        
+        /**
+         * Таблица "Значения свойств"
+         */
+        'property_value' => array(
+            'title' => 'Значения свойств',
+            'class' => 'propertyValue',
+            'fields' => array(
+                'value_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
+                'value_property' => array( 'title' => 'Свойство', 'type' => 'table', 'table' => 'property', 'errors' => 'require' ),
+                'value_title' => array( 'title' => 'Название', 'type' => 'string', 'show' => 1, 'main' => 1, 'sort' => 'asc', 'errors' => 'require' ),
+            ),
+        ),
+        
+        /**
+         * Таблица "Свойства товара"
+         */
+        'product_property' => array(
+            'title' => 'Свойства товара',
+            'internal' => 1,
+            'fields' => array(
+                'product_id' => array( 'title' => 'Товар', 'type' => 'table', 'table' => 'product', 'errors' => 'require' ),
+                'property_id' => array( 'title' => 'Свойство', 'type' => 'table', 'table' => 'property', 'errors' => 'require' ),
+                'value' => array( 'title' => 'Значение', 'type' => 'string', 'errors' => 'require' ),
             ),
         ),
         
