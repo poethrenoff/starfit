@@ -118,7 +118,11 @@
 												<?= $property->get_property_title() ?>
 											</td>
 											<td class="value">
+<? if ($property->get_property_kind() == 'boolean') { ?>
+												<?= $property->get_property_value() ? 'есть' : 'нет' ?>
+<? } else { ?>
 												<?= $property->get_property_value() ?><?= $property->get_property_unit() ? ' ' . $property->get_property_unit() : '' ?>
+<? } ?>
 											</td>
 										</tr>
 <? 		} ?>
@@ -160,7 +164,9 @@
 <? 				} ?>
 														</div>
 <? 			} ?>
-														<img src="<?= $product_item->get_product_image() ?>" class="image">
+														<a href="<?= $product_item->get_product_url() ?>">
+															<img src="<?= $product_item->get_product_image() ?>" class="image">
+														</a>
 													</div>
 													<div class="price-container">
 														<div class="old-price">

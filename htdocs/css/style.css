@@ -701,6 +701,7 @@ textarea.input {
 .b-catalog-item .info{
     overflow: hidden;
     padding-bottom: 20px;
+    min-height: 255px;
 }
 
 .b-catalog-item .info .photo{
