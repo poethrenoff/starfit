@@ -1,0 +1,55 @@
+					<div class="block first">
+						<div class="b-form">
+							<h1><i></i>Заказать обратный звонок</h1>
+<? if (session::flash('success')) { ?>
+							<p style="color: #448600; font-size: 16px;"><b>Спасибо за Вашу заявку. Наш менеджер перезвонит Вам в указанное время.</b></p>
+<? } else { ?>
+							<form method="POST">
+								<div class="field">
+									Ваше имя, фамилия, отчество <span class="require">*</span>:
+									<br />
+									<input type="text" class="input" name="callback_person" value="<?= $this->escape($this->from_request('callback_person')) ?>" />
+<? if ($this->error['callback_person']) { ?>
+									<span class="require"><?= $this->error['callback_person'] ?></span>
+<? } ?>
+								</div>
+								<div class="field">
+									Ваш телефон <span class="require">*</span>:
+									<br />
+									<input type="text" class="input" name="callback_phone" value="<?= $this->escape($this->from_request('callback_phone')) ?>" />
+<? if ($this->error['callback_phone']) { ?>
+									<span class="require"><?= $this->error['callback_phone'] ?></span>
+<? } ?>
+								</div>
+								<div class="field">
+									Удобное время звонка:
+									<br />
+									<input type="text" class="input" name="callback_time" value="<?= $this->escape($this->from_request('callback_time')) ?>" />
+<? if ($this->error['callback_time']) { ?>
+									<span class="require"><?= $this->error['callback_time'] ?></span>
+<? } ?>
+								</div>
+								<div class="field">
+									Комментарий<br>(например, интересующий товар):
+									<br />
+									<textarea class="input" name="callback_comment"><?= $this->escape($this->from_request('callback_comment')) ?></textarea>
+<? if ($this->error['callback_comment']) { ?>
+									<span class="require"><?= $this->error['callback_comment'] ?></span>
+<? } ?>
+								</div>
+								<div class="field fail">
+									<img src="/image/captcha.php" />
+									<input type="text" class="input" name="captcha" value="" />
+<? if ($this->error['captcha']) { ?>
+									<span class="require"><?= $this->error['captcha'] ?></span>
+<? } ?>
+									<br />
+									Введите символы с картинки
+								</div>
+								<div class="field">
+									<input type="submit" value="Заказать звонок" class="btn" />
+								</div>
+							</form>
+<? } ?>
+						</div>
+					</div>
