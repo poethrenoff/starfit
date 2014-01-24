@@ -1,0 +1,4 @@
+Disallow: /subscribe/
+Disallow: /cart/
+Host: starfit.ru
+Sitemap: http://starfit.ru/sitemap
