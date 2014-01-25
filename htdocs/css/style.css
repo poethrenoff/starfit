@@ -160,6 +160,11 @@ textarea.input {
     color:#ccc;
 }
 
+.b-header .callback {
+    display: block;
+    margin-top: 10px;
+}
+
 .b-header .basket{
     position: absolute;
     top:45px;
@@ -792,12 +797,19 @@ textarea.input {
 
 .b-catalog-item .info .price-container .stock{
     position: absolute;
-    margin-top: 130px;
-    margin-left: 30px;
+    margin-top: 100px;
+    margin-left: 28px;
     padding-left: 23px;
     padding-top: 7px;
     height: 20px;
     background: url(/image/available.png) no-repeat left center;
+}
+
+.b-catalog-item .info .price-container .share{
+    position: absolute;
+    margin-top: 130px;
+    margin-left: 25px;
+    cursor: default;
 }
 
 .b-catalog-item .info .picture-container{
