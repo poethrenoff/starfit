@@ -168,6 +168,7 @@ class metadata
          */
         'product_picture' => array(
             'title' => 'Изображения товаров',
+            'class' => 'productPicture',
             'fields' => array(
                 'picture_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
                 'picture_product' => array( 'title' => 'Товар', 'type' => 'table', 'table' => 'product', 'errors' => 'require' ),

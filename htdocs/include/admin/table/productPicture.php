@@ -1,16 +1,11 @@
 <?php
-class admin_table_catalogue extends admin_table_meta
+class admin_table_productPicture extends admin_table_meta
 {
     protected function action_add_save( $redirect = true )
     {
-        if (!init_string('catalogue_name')) {
-            $_REQUEST['catalogue_name'] = to_translit(init_string('catalogue_title'));
-        }
-        unset( $this -> fields['catalogue_name']['no_add'] );
-        
         $primary_field = parent::action_add_save( false );
         
-        if ((isset( $_FILES['catalogue_image_file']['name']) && $_FILES['catalogue_image_file']['name'])) {
+        if ((isset( $_FILES['picture_image_file']['name']) && $_FILES['picture_image_file']['name'])) {
             $this->apply_watermark($primary_field);
         }
         
@@ -24,7 +19,7 @@ class admin_table_catalogue extends admin_table_meta
     {
         parent::action_edit_save( false );
         
-        if (isset($_FILES['catalogue_image_file']['name']) && $_FILES['catalogue_image_file']['name']) {
+        if (isset($_FILES['picture_image_file']['name']) && $_FILES['picture_image_file']['name']) {
             $this->apply_watermark(id());
         }
         
@@ -34,8 +29,8 @@ class admin_table_catalogue extends admin_table_meta
     
     protected function apply_watermark($primary_field)
     {
-        $catalogue = model::factory('catalogue')->get($primary_field);
-        $source_image = str_replace(UPLOAD_ALIAS, normalize_path(UPLOAD_DIR), $catalogue->get_catalogue_image());
+        $picture = model::factory('product_picture')->get($primary_field);
+        $source_image = str_replace(UPLOAD_ALIAS, normalize_path(UPLOAD_DIR), $picture->get_picture_image());
         $watermark_image = $_SERVER['DOCUMENT_ROOT'] . '/image/watermark.png';
         
         image::process('watermark', array(
