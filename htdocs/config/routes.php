@@ -10,6 +10,13 @@
             'action' => 'item',
         ),
         
+        // Путь к новостям
+        '/news/@news' => array(
+            'controller' => 'news',
+            'news' => '\w+',
+            'action' => 'item',
+        ),
+        
         // Путь к каталогу
         '/product/@catalogue' => array(
             'controller' => 'product',

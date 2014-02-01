@@ -32,6 +32,22 @@ class metadata
         ),
         
         /**
+         * Таблица "Новости"
+         */
+        'news' => array(
+            'title' => 'Новости',
+            'class' => 'news',
+            'fields' => array(
+                'news_id' => array('title' => 'Идентификатор', 'type' => 'pk'),
+                'news_title' => array('title' => 'Заголовок', 'type' => 'string', 'show' => 1, 'main' => 1, 'errors' => 'require'),
+                'news_name' => array( 'title' => 'Ссылка', 'type' => 'string', 'errors' => 'require', 'no_add' => 1, 'group' => array() ),
+                'news_content' => array('title' => 'Текст', 'type' => 'text', 'editor' => 1, 'errors' => 'require'),
+                'news_date' => array('title' => 'Дата', 'type' => 'date', 'show' => 1, 'errors' => 'require'),
+                'news_active' => array('title' => 'Видимость', 'type' => 'active'),
+            ),
+        ),
+        
+        /**
          * Таблица "Статьи"
          */
         'article' => array(

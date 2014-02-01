@@ -204,7 +204,7 @@ textarea.input {
     display: block;
     height: 43px;
     margin: 0;
-    padding: 0 0 0 90px;
+    padding: 0 0 0 50px;
     list-style: none;
 }
 
@@ -223,7 +223,7 @@ textarea.input {
     display: block;
     height: 43px;
     line-height: 43px;
-    padding:0 15px 0 15px;
+    padding:0 16px 0 16px;
     text-align: center;
     color: #fff; /* text color */
     text-shadow: 0 1px 0 rgba(113,113,113,.75); /* drop shadow */
@@ -893,4 +893,8 @@ textarea.input {
 
 .b-order .form .field textarea.order{
     height:100px;
+}
+
+.pages {
+    text-align: center;
 }

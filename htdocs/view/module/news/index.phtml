@@ -1,0 +1,19 @@
+							<div class="block first">
+								<h1><i></i>Новости</h1>
+								<div class="b-articles">
+<? foreach ($this->news_list as $news_item) { ?>
+									<div class="item first ">
+										<div class="">
+											<div class="name">
+												<a href="<?= $news_item->get_news_url() ?>"> <?= $news_item->get_news_title() ?></a>
+												<br><span style="margin-left: 20px;"><?= date::get($news_item->get_news_date()) ?></span>
+											</div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+<? } ?>
+									<div class="clearfix"></div>
+<?= $this -> pages ?>
+								</div>
+							</div>
+

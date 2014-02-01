@@ -1,0 +1,10 @@
+							<div class="block articles">
+								<h2><i></i>Новости</h2>
+<? foreach ($this->news_list as $news_item) { ?>
+								<div class="item">
+									<div class="name"><a href="<?= $news_item->get_news_url() ?>"><?= $news_item->get_news_title() ?></a></div>
+								</div>
+<? } ?>
+								<div class="more"><a href="<?= url_for(array('controller' => 'news')) ?>">Все новоси</a></div>
+							</div>
+
