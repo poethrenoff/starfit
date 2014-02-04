@@ -29,6 +29,13 @@
             'action' => 'vote',
         ),
         
+        // Путь к фильтру
+        '/product/marker/@marker' => array(
+            'controller' => 'product',
+            'marker' => '\w+',
+            'action' => 'marker_list',
+        ),
+        
         // Путь к товару
         '/product/@catalogue/@id' => array(
             'controller' => 'product',

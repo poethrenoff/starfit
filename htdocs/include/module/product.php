@@ -171,15 +171,31 @@ class module_product extends module
         $product_novelty_list = model::factory('product')->get_by_marker($marker_novelty);
         $marker_leader = model::factory('marker')->get_by_name('leader');
         $product_leader_list = model::factory('product')->get_by_marker($marker_leader);
+        $marker_discount = model::factory('marker')->get_by_name('discount');
+        $product_discount_list = model::factory('product')->get_by_marker($marker_discount);
         
-        $novelty_view = new view();
-        $novelty_view->assign('marker', $marker_novelty);
-        $novelty_view->assign('product_list', $product_novelty_list);
-        $leader_view = new view();
-        $leader_view->assign('marker', $marker_leader);
-        $leader_view->assign('product_list', $product_leader_list);
-        
-        $this->content = $novelty_view->fetch('module/product/marker') . $leader_view->fetch('module/product/marker');
+		foreach (array('novelty', 'leader', 'discount') as $marker_name) {
+			$marker = model::factory('marker')->get_by_name($marker_name);
+			$product_list = model::factory('product')->get_by_marker($marker);
+			
+			$marker_view = new view();
+			$marker_view->assign('marker', $marker);
+			$marker_view->assign('product_list', $product_list);
+			
+			$this->content .= $marker_view->fetch('module/product/marker');
+		}
+    }
+    
+    protected function action_marker_list()
+    {
+        $marker_name = get_param('marker');
+		
+        $marker = model::factory('marker')->get_by_name($marker_name);
+		$product_list = model::factory('product')->get_by_marker($marker, 1000);
+		
+        $this->view->assign('marker', $marker);
+		$this->view->assign('product_list', $product_list);
+        $this->content = $this->view->fetch('module/product/marker');
     }
     
     ////////////////////////////////////////////////////////////////////////////////////////////////
