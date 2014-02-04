@@ -1,6 +1,6 @@
 <? if ($this->product_list) { ?>
 							<div class="block marker">
-								<h2 class="line"><i></i><?= $this->marker->get_marker_title() ?><? if (action() == 'index') { ?> <a href="<?= url_for(array('controller' => 'product', 'action' => 'marker_list', 'marker' => $this->marker->get_marker_name())) ?>" style="float: right">Показать все</a><? } ?></h2>
+								<h2 class="line"><i></i><?= $this->marker->get_marker_title() ?><? if (action() == 'index') { ?> <a href="<?= url_for(array('controller' => 'product', 'action' => 'marker_list', 'marker' => $this->marker->get_marker_name())) ?>" style="float: right">Все <?= $this->marker->get_marker_title() ?></a><? } ?></h2>
 								<div class="catalog marker">
 <? foreach ($this->product_list as $product_item) { ?>
 									<div class="item">
