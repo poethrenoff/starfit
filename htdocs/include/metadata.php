@@ -156,6 +156,7 @@ class metadata
             ),
             'links' => array(
                 'product_picture' => array( 'table' => 'product_picture', 'field' => 'picture_product', 'title' => 'Изображения' ),
+                'spy_link' => array( 'table' => 'spy_link', 'field' => 'link_product' ),
             ),
             'relations' => array(
                 'marker' => array( 'secondary_table' => 'marker', 'relation_table' => 'product_marker',
@@ -359,6 +360,58 @@ class metadata
             )
         ),
         
+        /////////////////////////////////////////  PriceSpy  ///////////////////////////////////////
+        
+        /**
+         * Таблица "Сайты"
+         */
+        'spy_site' => array(
+            'title' => 'Сайты',
+            'class' => 'spySite',
+            'fields' => array(
+                'site_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
+                'site_title' => array( 'title' => 'Название', 'type' => 'string', 'show' => 1, 'main' => 1, 'errors' => 'require' ),
+                'site_url' => array( 'title' => 'Ссылка', 'type' => 'string', 'errors' => 'require' ),
+                'site_pattern' => array( 'title' => 'Шаблон', 'type' => 'string', 'errors' => 'require' ),
+                'site_utf8' => array( 'title' => 'UTF-8', 'type' => 'boolean' ),
+                'site_active' => array( 'title' => 'Видимость', 'type' => 'active' ),
+            ),
+            'links' => array(
+                'spy_link' => array( 'table' => 'spy_link', 'field' => 'link_site' ),
+            ),
+        ),
+        
+        /**
+         * Таблица "Ссылки"
+         */
+        'spy_link' => array(
+            'title' => 'Ссылки',
+            'class' => 'spyLink',
+            'model' => 'spyLink',
+            'fields' => array(
+                'link_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
+                'link_site' => array( 'title' => 'Сайт', 'type' => 'table', 'table' => 'spy_site', 'errors' => 'require' ),
+                'link_product' => array( 'title' => 'Товар', 'type' => 'table', 'table' => 'product', 'errors' => 'require' ),
+                'link_url' => array( 'title' => 'Ссылка', 'type' => 'string', 'errors' => 'require', 'main' => 1 ),
+                'link_active' => array( 'title' => 'Видимость', 'type' => 'active' ),
+            ),
+        ),
+        
+        /**
+         * Таблица "История"
+         */
+        'spy_history' => array(
+            'title' => 'История',
+            'model' => 'spyHistory',
+            'internal' => true,
+            'fields' => array(
+                'history_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
+                'history_link' => array( 'title' => 'Ссылка', 'type' => 'table', 'table' => 'spy_site', 'errors' => 'require' ),
+                'history_date' => array( 'title' => 'Дата обработки', 'type' => 'datetime', 'errors' => 'require|datetime' ),
+                'history_price' => array( 'title' => 'Цена товара', 'type' => 'float', 'errors' => 'float' ),
+                'history_error' => array( 'title' => 'Сообщение об ошибке', 'type' => 'text' ),
+            ),
+        ),
         
         ////////////////////////////////////////////////////////////////////////////////////////
         

@@ -18,7 +18,6 @@ class field_date extends field
     
     public function check($content, $errors_string = '')
     {
-        return valid::factory('date')->internal_check($content) &&
-            parent::check($content, $errors_string);
+        return valid::factory('date')->internal_check($content);
     }
 }

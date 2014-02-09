@@ -1,0 +1,17 @@
+<table class="record">
+	<tr>
+		<td align="left">
+			<b><?=$this -> record_title?></b><br/><?=$this -> action_title?>
+		</td>
+	</tr>
+	<tr>
+		<td align="right">
+			<input type="button" value="Вернуться" class="button" onclick="location.href = '<?=$this -> back_url?>'"/>
+		</td>
+	</tr>
+	<tr>
+		<td align="left">
+<?= block('admin/pricespy/message', $this) ?> 
+		</td>
+	</tr>
+</table>
