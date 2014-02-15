@@ -49,9 +49,12 @@ class pricespy {
             
             if (@preg_match($site_pattern, $result, $matches)) {
                 $history_price = $matches[1];
-                $history_price = str_replace(' ', '', $history_price);
-                $history_price = str_replace('.', '', $history_price);
-                $history_price = str_replace(',', '.', $history_price);
+                if ($site->get_site_thousands_sep()) {
+                    $history_price = str_replace($site->get_site_thousands_sep(), '', $history_price);
+                }
+                if ($site->get_site_dec_point()) {
+                    $history_price = str_replace($site->get_site_dec_point(), '.', $history_price);
+                }
             } else {
                 $history_error = 'Цена не найдена';
             }

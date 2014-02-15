@@ -373,6 +373,8 @@ class metadata
                 'site_title' => array( 'title' => 'Название', 'type' => 'string', 'show' => 1, 'main' => 1, 'errors' => 'require' ),
                 'site_url' => array( 'title' => 'Ссылка', 'type' => 'string', 'errors' => 'require' ),
                 'site_pattern' => array( 'title' => 'Шаблон', 'type' => 'string', 'errors' => 'require' ),
+                'site_dec_point' => array( 'title' => 'Разделитель дробной части', 'type' => 'string'),
+                'site_thousands_sep' => array( 'title' => 'Разделитель тысяч', 'type' => 'string'),
                 'site_utf8' => array( 'title' => 'UTF-8', 'type' => 'boolean' ),
                 'site_active' => array( 'title' => 'Видимость', 'type' => 'active' ),
             ),

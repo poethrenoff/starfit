@@ -18,7 +18,7 @@
 	$site = model::factory('spy_site')->get($link->get_link_site());
 	$product = model::factory('product')->get($link->get_link_product());
 	
-	if (!$history->get_history_error() && $history->get_history_price() >= $product->get_product_price()) {
+	if (!($this->show_all || $history->get_history_error() || $history->get_history_price() < $product->get_product_price())) {
 		continue;
 	}
 ?>
@@ -35,8 +35,10 @@
 		<td>
 <? if ($history->get_history_error()) { ?>
 			<span style="color: red"><?= $history->get_history_error() ?></span>
-<? } else { ?>
+<? } elseif ($history->get_history_price() < $product->get_product_price()) { ?>
 			<span style="color: red"><?= number_format($history->get_history_price(), 0, ',', ' ') ?></span>
+<? } else { ?>
+			<span style="color: green"><?= number_format($history->get_history_price(), 0, ',', ' ') ?></span>
 <? } ?>
 		</td>
 	</tr>
