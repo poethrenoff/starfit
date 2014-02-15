@@ -706,7 +706,7 @@ textarea.input {
 .b-catalog-item .info{
     overflow: hidden;
     padding-bottom: 20px;
-    min-height: 255px;
+    min-height: 285px;
 }
 
 .b-catalog-item .info .photo{
@@ -820,11 +820,22 @@ textarea.input {
     text-align: left;
 }
 
-.b-catalog-item .info .picture-container img{
+.b-catalog-item .info .picture-container a.highslide img{
     border: 1px solid #C0C0C0;
     width: 85px;
     height: 85px;
     margin-right: 10px;
+}
+
+.b-catalog-item .info .picture-container .wholesale{
+    position: absolute;
+    margin-left: 195px;
+    margin-top: 100px;
+    width: 85px;
+}
+
+.b-catalog-item .info .picture-container.empty .wholesale{
+    margin-top: 0px;
 }
 
 .description{

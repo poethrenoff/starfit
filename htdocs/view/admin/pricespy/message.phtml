@@ -17,13 +17,17 @@
 	$link = model::factory('spy_link')->get($history->get_history_link());
 	$site = model::factory('spy_site')->get($link->get_link_site());
 	$product = model::factory('product')->get($link->get_link_product());
+	
+	if (!$history->get_history_error() && $history->get_history_price() >= $product->get_product_price()) {
+		continue;
+	}
 ?>
 	<tr class="record">
 		<td>
 			<?= $site->get_site_title() ?> 
 		</td>
 		<td>
-			<?= $product->get_product_title() ?> 
+			<a href="<?= $link->get_link_url() ?>"><?= $product->get_product_title() ?></a>
 		</td>
 		<td>
 			<?= number_format($product->get_product_price(), 0, ',', ' ') ?> 
@@ -31,10 +35,8 @@
 		<td>
 <? if ($history->get_history_error()) { ?>
 			<span style="color: red"><?= $history->get_history_error() ?></span>
-<? } elseif ($history->get_history_price() < $product->get_product_price()) { ?>
-			<span style="color: red"><?= number_format($history->get_history_price(), 0, ',', ' ') ?></span>
 <? } else { ?>
-			<span style="color: green"><?= number_format($history->get_history_price(), 0, ',', ' ') ?></span>
+			<span style="color: red"><?= number_format($history->get_history_price(), 0, ',', ' ') ?></span>
 <? } ?>
 		</td>
 	</tr>

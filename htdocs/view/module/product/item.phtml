@@ -106,11 +106,20 @@
 										</div>
 <? if ($picture_list = $this->get_picture_list()) { ?>
 										<div class="picture-container">
+											<div class="wholesale">
+												<a href="/subscribe"><img src="/image/wholesale-button.png" ></a>
+											</div>
 <? 		foreach ($picture_list as $picture) { ?>
 											<a href="<?= $picture->get_picture_image() ?>" class="highslide" onclick="return hs.expand(this)">
 												<img src="<?= $picture->get_picture_image() ?>/c/85/85" />
 											</a>
 <? 		} ?>
+										</div>
+<? } else { ?>
+										<div class="picture-container empty">
+											<div class="wholesale">
+												<a href="/subscribe"><img src="/image/wholesale-button.png" ></a>
+											</div>
 										</div>
 <? } ?>
 										<div class="clearfix"></div>
