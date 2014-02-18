@@ -3,7 +3,7 @@ include_once dirname(__FILE__) . '/../../config/config.php';
 
 $pricespy = new pricespy();
 $pricespy->parse();
-$report = $pricespy->get_report()
+$report = $pricespy->get_report();
 
 $view = new view();
 $view->assign('report', $report);
