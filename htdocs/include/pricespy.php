@@ -42,9 +42,9 @@ class pricespy {
             
             $site = model::factory('spy_site')->get($link->get_link_site());
             if ($site->get_site_utf8()) {
-                $site_pattern = '/' . $site->get_site_pattern() . '/iu';
+                $site_pattern = '#' . $site->get_site_pattern() . '#iu';
             } else {
-                $site_pattern = '/' . iconv('UTF-8', 'Windows-1251', $site->get_site_pattern()) . '/i';
+                $site_pattern = '#' . iconv('UTF-8', 'Windows-1251', $site->get_site_pattern()) . '#i';
             }
             
             if (@preg_match($site_pattern, $result, $matches)) {
