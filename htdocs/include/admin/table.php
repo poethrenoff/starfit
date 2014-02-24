@@ -811,12 +811,19 @@ class admin_table extends admin
         return db::select_all($query, $this->filter_binds + $query_binds);
     }
     
-    public function get_table_records($table, $except = array())
+    public function get_table_records($table, $except = array(), $filter_conds = array())
     {
         $table_object = admin::factory($table, false);
         
         $table_object->sort_field = $table_object->main_field;
         $table_object->sort_order = 'asc';
+        
+		$filter_fields = array(); $filter_binds = array(); 
+		foreach ($filter_conds as $filter_field => $filter_value) {
+			$filter_fields[] = $filter_field . ' = :' . $filter_field;
+			$filter_binds[$filter_field] = $filter_value;
+		}
+		$table_object->set_filter_condition($filter_fields, $filter_binds);
         
         $table_records = $table_object->get_records();
         
@@ -1178,14 +1185,15 @@ class admin_table extends admin
                         $field_desc['default'], $field_desc['type']);
             }
             
+            $field_conds = isset($field_desc['conds']) ? $field_desc['conds'] : array();
             if ($field_desc['type'] == 'select')
                 $form_fields[$field_name]['values'] = $field_desc['values'];
             if ($field_desc['type'] == 'table')
-                $form_fields[$field_name]['values'] = $this->get_table_records($field_desc['table']);
+                $form_fields[$field_name]['values'] = $this->get_table_records($field_desc['table'], array(), $field_conds);
             if ($field_desc['type'] == 'parent')
             {
                 $except = $action == 'edit' ? array($record[$this->primary_field]) : array();
-                $form_fields[$field_name]['values'] = $this->get_table_records($this->object, $except);
+                $form_fields[$field_name]['values'] = $this->get_table_records($this->object, $except, $field_conds);
             }
             
             $form_fields[$field_name]['require'] = $form_fields[$field_name]['errors_code'] & field::$errors['require'];

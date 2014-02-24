@@ -393,7 +393,7 @@ class metadata
             'fields' => array(
                 'link_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
                 'link_site' => array( 'title' => 'Сайт', 'type' => 'table', 'table' => 'spy_site', 'errors' => 'require' ),
-                'link_product' => array( 'title' => 'Товар', 'type' => 'table', 'table' => 'product', 'errors' => 'require' ),
+                'link_product' => array( 'title' => 'Товар', 'type' => 'table', 'table' => 'product', 'errors' => 'require', 'conds' => array('product_active' => 1) ),
                 'link_url' => array( 'title' => 'Ссылка', 'type' => 'string', 'errors' => 'require', 'main' => 1 ),
                 'link_active' => array( 'title' => 'Видимость', 'type' => 'active' ),
             ),
