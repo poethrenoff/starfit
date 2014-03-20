@@ -1,6 +1,13 @@
 							 <div class="block first">
 								<h1 class="line h1"><i></i><?= $this->get_catalogue_title() ?: 'Продукция' ?></h1>
 								<div class="catalog">
+<? if (!$this->get_catalogue_title()) { ?>
+									<div class="banner">
+										<a href="/wholesale">
+											<img src="/image/banner.png" />
+										</a>
+									</div>
+<? } ?>
 <? foreach ($this->get_children() as $catalogue_item) { ?>
 									<div class="item" style="width: 200px;">
 										<div class="wrap">

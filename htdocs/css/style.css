@@ -601,6 +601,11 @@ textarea.input {
     padding:2px 0;
 }
 
+.b-content .right .catalog .banner{
+    margin-left: 20px;
+    padding:10px;
+}
+
 .b-content .right .filter {
     margin-bottom: 15px;
 }
