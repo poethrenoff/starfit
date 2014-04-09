@@ -223,7 +223,7 @@ textarea.input {
     display: block;
     height: 43px;
     line-height: 43px;
-    padding:0 16px 0 16px;
+    padding:0 12px 0 12px;
     text-align: center;
     color: #fff; /* text color */
     text-shadow: 0 1px 0 rgba(113,113,113,.75); /* drop shadow */
