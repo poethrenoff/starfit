@@ -147,12 +147,12 @@ textarea.input {
     position: absolute;
     top:15px;
     left:390px;
-    background: url(/image/phones-bg.png) no-repeat 0 50%;
+    background: url(/image/phones-bg.png) no-repeat 0 30%;
     padding-left: 40px;
 }
 
 .b-header .phones .line{
-    font-size:30px;
+    font-size:24px;
     font-family: Century Gothic;
 }
 
