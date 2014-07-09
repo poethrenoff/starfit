@@ -141,7 +141,7 @@ class admin_fm extends admin
         
         if ( isset( $_FILES[$field_name . '_file']['name'] ) && $_FILES[$field_name . '_file']['name'] )
         {
-            $upload = upload::fetch( $field_name . '_file' );
+            $upload = upload::fetch( $field_name . '_file', array( 'upload_path' => '' ) );
             
             if ( $upload -> is_error() )
                 throw new AlarmException( 'Ошибка. ' . $upload -> get_error() . '.' );
@@ -158,7 +158,7 @@ class admin_fm extends admin
         
         if ( isset( $_FILES['upload']['name'] ) && $_FILES['upload']['name'] )
         {
-            $upload = upload::fetch( 'upload' );
+            $upload = upload::fetch( 'upload', array( 'upload_path' => '' ) );
             
             if ( $upload -> is_error() )
                 die( '<script type="text/javascript">alert( "Ошибка! ' . $upload -> get_error() . '." ); window.parent.CKEDITOR.tools.callFunction(' . $CKEditorFuncNum . ', "", "");</script>' );
@@ -166,7 +166,7 @@ class admin_fm extends admin
         else
             die( '<script type="text/javascript">alert( "Ошибка! Отсутствует файл для закачки." ); window.parent.CKEDITOR.tools.callFunction(' . $CKEditorFuncNum . ', "", "");</script>' );
         
-        die( '<script type="text/javascript">window.parent.CKEDITOR.tools.callFunction(' . $CKEditorFuncNum . ', "' . $upload -> get_file_link() . '", "");</script>' );
+        die( '<script type="text/javascript">window.parent.CKEDITOR.tools.callFunction(' . $CKEditorFuncNum . ', "' . $upload -> get_file_link(true) . '", "");</script>' );
     }
     
     private function sort_file_list( $a, $b )

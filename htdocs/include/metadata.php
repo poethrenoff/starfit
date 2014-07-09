@@ -647,13 +647,67 @@ class metadata
         ),
         
         /**
+         * Таблицы, используемые утилитой рассылки
+         */
+        'delivery_person' => array(
+            'title' => 'Лист рассылки',
+            'fields' => array(
+                'person_id' => array('title' => 'Идентификатор', 'type' => 'pk'),
+                'person_email' => array('title' => 'Email', 'type' => 'string', 'show' => 1, 'main' => 1, 'sort' => 'asc', 'errors' => 'require|email'),
+                'person_title' => array('title' => 'Компания', 'type' => 'string', 'show' => 1),
+                'person_admin' => array('title' => 'Администратор', 'type' => 'boolean', 'show' => 1),
+                'person_active' => array('title' => 'Активный', 'type' => 'active'),
+            ),
+        ),
+        
+        'delivery_body' => array(
+            'title' => 'Содержимое рассылки',
+            'internal' => 'true',
+            'fields' => array(
+                'body_id' => array('title' => 'Идентификатор', 'type' => 'pk'),
+                'body_headers' => array('title' => 'Заголовки письма', 'type' => 'text'),
+                'body_text' => array('title' => 'Текст письма', 'type' => 'text'),
+            ),
+        ),
+        
+        'delivery_queue' => array(
+            'title' => 'Очередь рассылки',
+            'internal' => 'true',
+            'fields' => array(
+                'queue_id' => array('title' => 'Идентификатор', 'type' => 'pk'),
+                'queue_body' => array('title' => 'Письмо', 'type' => 'table', 'table' => 'delivery_body', 'errors' => 'require'),
+                'queue_person' => array('title' => 'Получатель', 'type' => 'table', 'table' => 'delivery_person', 'errors' => 'require'),
+            ),
+        ),
+        
+        'delivery_storage' => array(
+            'title' => 'Последнее письмо',
+            'internal' => true,
+            'fields' => array(
+                'body_id' => array('title' => 'Идентификатор', 'type' => 'pk'),
+                'body_subject' => array('title' => 'Тема письма', 'type' => 'string'),
+                'body_email' => array('title' => 'От кого', 'type' => 'string'),
+                'body_name' => array('title' => 'От кого (имя)', 'type' => 'string'),
+                'body_text' => array('title' => 'Текст письма', 'type' => 'text'),
+             ),
+        ),
+        
+        /**
          * Утилита "Файл-менеджер"
          */
         'fm' => array(
             'title' => 'Файл-менеджер',
             'class' => 'fm'
         ),
-   );
+        
+        /**
+         * Утилита "Почтовая рассылка"
+         */
+        'delivery' => array(
+            'title' => 'Почтовая рассылка',
+            'class' => 'delivery',
+        ),
+    );
 }
 
 //db::create();
