@@ -322,10 +322,9 @@ class image {
         }
 		
         $source_resource = $this->create();
-		
         imagesavealpha($source_resource, true);
-        imagealphablending($source_resource, false);
-        
+        imagesavealpha($watermark_resource, true);
+
 		$nwidth = $this->orig_width / 2;
 		$nheight = $watermark_height * $nwidth / $watermark_width;
 		
