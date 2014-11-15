@@ -174,7 +174,7 @@ class module_product extends module
         $marker_discount = model::factory('marker')->get_by_name('discount');
         $product_discount_list = model::factory('product')->get_by_marker($marker_discount);
         
-		foreach (array('novelty', 'leader', 'discount') as $marker_name) {
+		foreach (array('discount', 'novelty', 'leader') as $marker_name) {
 			$marker = model::factory('marker')->get_by_name($marker_name);
 			$product_list = model::factory('product')->get_by_marker($marker);
 			
