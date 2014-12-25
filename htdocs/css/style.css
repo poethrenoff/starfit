@@ -85,20 +85,18 @@ textarea.input {
     top:0;
     left:0;
     width:100%;
-    height: 44px;
+    height: 35px;
 }
 
 .b-header .top .contacts{
     position: absolute;
-    top:80px;
+    top:75px;
     left:20px;
-    height: 44px;
 }
 
 .b-header .top .contacts .field{
     position: absolute;
-    height: 44px;
-    line-height: 44px;
+    line-height: 30px;
     width: 100px;
 }
 
@@ -124,6 +122,20 @@ textarea.input {
     background: url(/image/email.png) no-repeat 0 50%;
     padding-left:31px;
     margin-top: 30px;
+}
+
+.b-header .top .sklad {
+    position: absolute;
+    line-height: 30px;
+    margin-top: 58px;
+    margin-left: 20px;
+    width: 300px;
+    font-size: 16px;
+    color: #c00000;
+    font-weight: bold;
+}
+.b-header .top .sklad a {
+    font-size: 16px;
 }
 
 .b-header .basket{
@@ -354,6 +366,18 @@ textarea.input {
     margin-right: 15px;
 }
 
+.b-promo .copyright .copy{
+    text-align: right;
+    margin-top: 130px;
+    margin-right: 15px;
+}
+
+.setlinks {
+    position: relative;
+    background: url(/image/promo-bg.png) no-repeat;
+    padding: 0px 0px 10px 220px;
+    text-align: center;
+}
 
 .b-content {
     margin:0px 0px 0px 7px;
