@@ -735,11 +735,11 @@ textarea.input {
 .b-catalog-item .info{
     overflow: hidden;
     padding-bottom: 20px;
-    min-height: 285px;
+    min-height: 260px;
 }
 
 .b-catalog-item .info .photo{
-    float:left;
+	position: absolute;
     width:430px;
 }
 
@@ -842,9 +842,9 @@ textarea.input {
 }
 
 .b-catalog-item .info .picture-container{
-    position: absolute;
     margin-left: 286px;
     margin-top: 175px;
+	padding-top: 28px;
     width: 396px;
     text-align: left;
 }
@@ -853,18 +853,18 @@ textarea.input {
     border: 1px solid #C0C0C0;
     width: 85px;
     height: 85px;
-    margin-right: 10px;
+    margin-right: 8px;
 }
 
 .b-catalog-item .info .picture-container .wholesale{
     position: absolute;
-    margin-left: 195px;
-    margin-top: 100px;
+    margin-left: 197px;
+    margin-top: -28px;
     width: 85px;
 }
 
 .b-catalog-item .info .picture-container.empty .wholesale{
-    margin-top: 0px;
+    margin-top: -28px;
 }
 
 .description{
