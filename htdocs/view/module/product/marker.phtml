@@ -29,7 +29,11 @@
 <? 		} ?>
 													</div>
 													<div class="price">
+<? 		if ($product_item->get_product_price()) { ?>
 														<?= $product_item->get_product_price() ?> р.
+<? 		} else { ?>
+														&nbsp;
+<? 		} ?>
 													</div>
 													<a href="<?= $product_item->get_product_url() ?>"><img src="/image/btn-more.png"></a>
 												</div>

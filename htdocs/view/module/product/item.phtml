@@ -64,7 +64,11 @@
 											</div>
 <? } ?>
 											<div class="price">
+<? if ($this->get_product_price()) { ?>
 												<?= $this->get_product_price() ?> руб.
+<? } else { ?>
+												<span style="font-size: 20px;">цену уточняйте</span>
+<? } ?>
 											</div>
 <? if ($brand = $this->get_brand()) { ?>
 											<div class="brand">
