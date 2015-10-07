@@ -1,0 +1,40 @@
+<?php
+	print '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
+?>
+<!DOCTYPE yml_catalog SYSTEM "shops.dtd">
+<yml_catalog date="<?= date('Y-m-d H:i') ?>">
+	<shop>
+		<name>Starfit</name>
+		<company>ПГС-Олимп</company>
+		<url>http://starfit.ru/</url>
+		<currencies>
+			<currency id="RUR" rate="1"/>
+		</currencies>
+		<categories>
+<?php foreach($this->catalogue_list as $catalogue_item) { ?>
+			<category id="<?= $catalogue_item->get_catalogue_id() ?>" parentId="<?= $catalogue_item->get_catalogue_parent() ?>"><?= $this->escape($catalogue_item->get_catalogue_title()) ?></category>
+<?php } ?>
+		</categories>
+		<offers>
+<?php foreach($this->product_list as $product_item) { ?>
+<?php       $catalogue = $product_item->get_catalogue() ?>
+<?php       if ($catalogue->get_catalogue_active()) { ?>
+<?php           $brand = $product_item->get_brand() ?>
+			<offer id="<?= $product_item->get_product_id() ?>" type="vendor.model" available="true">
+				<url>http://starfit.ru<?= $product_item->get_product_url() ?></url>
+				<price><?= $product_item->get_product_price() ?></price>
+				<currencyId>RUR</currencyId>
+				<categoryId><?= $product_item->get_product_catalogue() ?></categoryId>
+				<picture>http://starfit.ru<?= $product_item->get_product_image() ?></picture>
+				<typePrefix><?= $this->escape($catalogue ? $catalogue->get_catalogue_title() : '') ?></typePrefix>
+				<vendor><?= $this->escape($brand ? $brand->get_brand_title() : '') ?></vendor>
+				<model><?= $this->escape($product_item->get_product_title()) ?></model>
+				<description><![CDATA[
+                    <?= $product_item->get_product_description() ?>
+				]]></description>
+			</offer>
+<?php       } ?>
+<?php } ?>
+		</offers>
+	</shop>
+</yml_catalog>
