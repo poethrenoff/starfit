@@ -124,6 +124,12 @@ textarea.input {
     margin-top: 30px;
 }
 
+.b-header .top .contacts .field.ad{
+    padding-left: 0px;
+    margin-top: 57px;
+    width: 500px;
+}
+
 .b-header .top .sklad {
     position: absolute;
     line-height: 30px;
