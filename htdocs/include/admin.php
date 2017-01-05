@@ -423,9 +423,18 @@ abstract class admin extends object
 								( !( $errors_code & field::$errors['require'] ) ? array( 'ondelete' => 'set_null' ): array() );
 				}
 				
-				if ( isset( $field_desc['translate'] ) && $field_desc['translate'] &&
-						!( $field_desc['type'] == 'string' || $field_desc['type'] == 'text' ) )
-					throw new Exception( 'Ошибка в описании поля "' . $object_name . '.' . $field_name . '". Переводимыми могут быть только поля типа string и text.' );
+                if (isset($field_desc['translate']) && $field_desc['translate'] &&
+                        !in_array($field_desc['type'], array('string', 'text'))) {
+                    throw new \Exception('Ошибка в описании поля "' . $object_name . '.' . $field_name . '". Переводимыми могут быть только поля типа string и text.');
+                }
+                if (isset($field_desc['editable']) && $field_desc['editable'] &&
+                        !in_array($field_desc['type'], array('string', 'int', 'float'))) {
+                    throw new \Exception('Ошибка в описании поля "' . $object_name . '.' . $field_name . '". Редактировать в списке можно только поля типа string, int и float.');
+                }
+                if (isset($field_desc['editable']) && $field_desc['editable'] &&
+                        isset($field_desc['translate']) && $field_desc['translate']) {
+                    throw new \Exception('Ошибка в описании поля "' . $object_name . '.' . $field_name . '". Переводимые поля нельзя редактировать в списке.');
+                }
 			}
 			
 			if ( !( isset( metadata::$objects[$object_name]['primary_field'] ) && metadata::$objects[$object_name]['primary_field'] ) )

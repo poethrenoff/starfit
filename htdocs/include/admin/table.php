@@ -84,9 +84,16 @@ class admin_table extends admin
         
         foreach ($records as $record_id => $record)
         {
-            foreach ($this->show_fields as $show_field)
+            foreach ($this->show_fields as $show_field) {
                 $records[$record_id][$show_field] = field::get_field(
                     $records[$record_id][$show_field], $this->fields[$show_field]['type']);
+
+                if (isset($this->fields[$show_field]['editable']) && $this->fields[$show_field]['editable']) {
+                    $records[$record_id]['_extra']['edit_url'] =
+                        url_for(array('object' => $this->object,
+                            'action' => 'save_field', 'id' => $record[$this->primary_field]));
+                } 
+            }
             
             $records[$record_id] += $this->get_record_binds($record);
             $records[$record_id] += $this->get_record_links($record);
@@ -468,6 +475,48 @@ class admin_table extends admin
         
         if ($redirect)
             $this->redirect();
+    }
+
+    protected function action_save_field()
+    {
+        try {
+            $this->is_action_allow('edit', true);
+            
+            $record = $this->get_record();
+            $primary_field = $record[$this->primary_field];
+
+            $update_field_name = init_string('field');
+            if (!isset($this->fields[$update_field_name])) {
+                throw new AlarmException('Поля "' . $update_field_name . '" не существует.');
+            }
+            $field_desc = $this->fields[$update_field_name];
+            if (!isset($field_desc['editable']) || !$field_desc['editable']) {
+                throw new AlarmException('Поле "' . $field_desc['title'] . '" нельзя редактировать в списке.');
+            }
+            
+            $update_fields = array();
+            foreach ($this->fields as $field_name => $field_desc) {
+                if (isset($field_desc['no_edit']) && $field_desc['no_edit']) {
+                    continue;
+                }
+
+                if ($field_name == $update_field_name) {
+                    $update_fields[$field_name] = field::set_field(init_string('value'), $field_desc);
+                } else {
+                    $update_fields[$field_name] = $record[$field_name];
+                }
+            }
+            
+            $this->check_group_unique($update_fields, $primary_field);
+            
+            $this->clear_default_fields($update_fields);
+            
+            db::update($this->object, $update_fields, array($this->primary_field => $primary_field));
+            
+            $this->content = json_encode(array('success' => true, 'value' => (string) $update_fields[$update_field_name]));
+        } catch (AlarmException $e) {
+            $this->content = json_encode(array('success' => false, 'message' => $e->getMessage()));
+        }
     }
     
     protected function action_move($redirect = true)
