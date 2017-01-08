@@ -64,7 +64,7 @@ class hierarchy extends model
     }
     
     // Построение дерева записей
-    public function get_tree(&$records, $root_field = 0, $except = array())
+    public function get_tree($records, $root_field = 0, $except = array())
     {
         $root_parent = null;
         
