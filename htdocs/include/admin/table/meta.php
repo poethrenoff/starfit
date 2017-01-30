@@ -69,7 +69,7 @@ class admin_table_meta extends admin_table
         return $primary_field;
     }
     
-    protected function action_delete( $primary_field = '', $redirect = true )
+    protected function action_delete( $redirect = true )
     {
         $record = $this->get_record();
         $primary_field = $record[$this->primary_field];

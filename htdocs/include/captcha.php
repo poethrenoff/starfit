@@ -5,7 +5,7 @@
 class captcha {
 
     /** Width of the image */
-    public $width  = 150;
+    public $width  = 200;
 
     /** Height of the image */
     public $height = 50;
@@ -14,7 +14,7 @@ class captcha {
     public $wordsFile = '';
 
     /** Min word length (for non-dictionary random text generation) */
-    public $minWordLength = 5;
+    public $minWordLength = 8;
 
     /**
      * Max word length (for non-dictionary random text generation)
@@ -22,7 +22,7 @@ class captcha {
      * Used for dictionary words indicating the word-length
      * for font-size modification purposes
      */
-    public $maxWordLength = 6;
+    public $maxWordLength = 8;
 
     /** Background color in RGB-array */
     public $backgroundColor = array(255, 255, 255);
@@ -184,7 +184,7 @@ class captcha {
             $length = rand($this->minWordLength, $this->maxWordLength);
         }
 
-        $words  = "abcdefghijlmnopqrstvwyz";
+        $words  = "abcdefghijlmnopqrstvwyz0123456789";
         $vocals = "aeiou";
 
         $text  = "";
@@ -193,7 +193,7 @@ class captcha {
             if ($vocal) {
                 $text .= substr($vocals, mt_rand(0, 4), 1);
             } else {
-                $text .= substr($words, mt_rand(0, 22), 1);
+                $text .= substr($words, mt_rand(0, 32), 1);
             }
             $vocal = !$vocal;
         }
