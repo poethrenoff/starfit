@@ -60,13 +60,11 @@
 <? } ?>
 								</div>
 								<div class="field fail">
-									<img src="/image/captcha.php" style="width: 200px; height: 50px" />
-									<input type="text" class="input" name="captcha" value="" style="width: 90px" />
+									<script src='https://www.google.com/recaptcha/api.js'></script>
+									<div class="g-recaptcha" data-sitekey="<?= get_preference('recaptcha_public') ?>"></div>
 <? if ($this->error['captcha']) { ?>
 									<span class="require"><?= $this->error['captcha'] ?></span>
 <? } ?>
-									<br />
-									Введите символы с картинки
 								</div>
 								<div class="field">
 									<input type="submit" value="Зарегистрироваться" class="btn" />

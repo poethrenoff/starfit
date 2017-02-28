@@ -34,11 +34,8 @@ class module_subscribe extends module
                     $error['fax'] = 'Не заполнено обязательное поле';
                 }
             }
-            if (!isset($_POST['captcha']) || is_empty($_POST['captcha'])) {
-                $error['captcha'] = 'Не заполнено обязательное поле';
-            }
-            if (!isset($error['captcha']) && !captcha::check($_POST['captcha'])) {
-                $error['captcha'] = 'Неправильно введены символы с картинки';
+            if (!isset($error['captcha']) && !$this->check_captcha($_POST['g-recaptcha-response'])) {
+                $error['captcha'] = 'Вы не прошли проверку';
             }
             
             // Отправка сообщения
@@ -66,6 +63,21 @@ class module_subscribe extends module
         
         $this->view->assign('type_list', $this->type_list);
         $this->content = $this->view->fetch('module/subscribe/form');
+    }
+    
+    protected function check_captcha($response)
+    {
+        $url = get_preference('recaptcha_url');
+        $secret = get_preference('recaptcha_secret');
+        $remoteip = $_SERVER['REMOTE_ADDR'];
+        
+        $data = compact('secret', 'response', 'remoteip');
+        
+        $curl = new curl();
+        $result = $curl->post($url, $data);
+        $result = json_decode($result, true);
+        
+        return isset($result['success']) && $result['success'];
     }
     
     protected function action_registration()
