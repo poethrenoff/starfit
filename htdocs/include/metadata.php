@@ -150,6 +150,7 @@ class metadata
                 'product_stock' => array( 'title' => 'Наличие', 'type' => 'boolean'),
                 'product_rating' => array( 'title' => 'Рейтинг', 'type' => 'float', 'no_add' => true),
                 'product_voters' => array( 'title' => 'Количество голосов', 'type' => 'int', 'no_add' => true),
+                'product_sale' => array( 'title' => 'Распродажа', 'type' => 'boolean', 'filter' => true),
                 'product_stock' => array( 'title' => 'Наличие', 'type' => 'boolean'),
                 'product_order' => array( 'title' => 'Порядок', 'type' => 'order', 'group' => array( 'product_catalogue' ) ),
                 'product_active' => array( 'title' => 'Видимость', 'type' => 'active' ),

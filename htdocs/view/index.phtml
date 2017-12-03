@@ -5,6 +5,7 @@
 		<meta name="keywords" content="<?= $this->escape( $this -> meta_keywords ) ?>"/> 
 		<meta name="description" content="<?= $this->escape( $this -> meta_description ) ?>"/> 
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="yandex-verification" content="a62d01313f92a82c" />
 		<script type="text/javascript" src="/js/jquery.min.js"></script>
 		<script type="text/javascript" src="/js/custom.js"></script>
 		<link type="text/css" rel="stylesheet" href="/css/base.css" />
@@ -50,12 +51,14 @@
 					</div>
 					<div class="right">
 						<div class="wrap">
+<?= $this->sale ?>
 <?= $this->marker ?>
 <?= $this->content ?>
 						</div>
 					</div>
 					<div class="clearfix"></div>
 				</div>
+<!--
 				<div class="b-promo">
 <?= $this->advice ?>
 					<div class="copyright">
@@ -63,8 +66,9 @@
 					</div>
 				</div>
 				<div class="setlinks">
-					<? require_once( 'http://testea.ru/setlinks/slsimple.php?host=' . urlencode( $_SERVER['HTTP_HOST'] ) . '&uri=' . urlencode( $_SERVER['REQUEST_URI'] ) ); ?> 
+					<? // require_once( 'http://testea.ru/setlinks/slsimple.php?host=' . urlencode( $_SERVER['HTTP_HOST'] ) . '&uri=' . urlencode( $_SERVER['REQUEST_URI'] ) ); ?> 
 				</div>
+-->
 			</div>
 		</div>
 		<!-- Yandex.Metrika counter -->
