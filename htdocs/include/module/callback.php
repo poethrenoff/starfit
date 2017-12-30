@@ -8,9 +8,7 @@ class module_callback extends module
 			
 			$callback_person = init_string( 'callback_person' );
 			$callback_phone = init_string( 'callback_phone' );
-			$callback_time = init_string( 'callback_time' );
-			$callback_comment = init_string( 'callback_comment' );
-			$captcha = init_string( 'captcha' );
+			$captcha = init_string( 'g-recaptcha-response' );
 			
 			if (is_empty($callback_person)) {
 				$error['callback_person'] = 'Не заполнено обязательное поле';
@@ -18,12 +16,9 @@ class module_callback extends module
 			if (is_empty($callback_phone)) {
 				$error['callback_phone'] = 'Не заполнено обязательное поле';
 			}
-			if (is_empty($captcha)) {
-				$error['captcha'] = 'Не заполнено обязательное поле';
-			}
-			if (!isset($error['captcha']) && !captcha::check($captcha)) {
-				$error['captcha'] = 'Неправильно введены символы с картинки';
-			}
+            if (!$this->check_captcha($captcha)) {
+                $error['captcha'] = 'Вы не прошли проверку';
+            }
 			
 			// Отправка сообщения
 			if (!$error) {
@@ -49,7 +44,22 @@ class module_callback extends module
 		
 		$this->content = $this->view->fetch('module/callback/form');
 	}
-	
+
+    protected function check_captcha($response)
+    {
+        $url = get_preference('recaptcha_url');
+        $secret = get_preference('recaptcha_secret');
+        $remoteip = $_SERVER['REMOTE_ADDR'];
+
+        $data = compact('secret', 'response', 'remoteip');
+
+        $curl = new curl();
+        $result = $curl->post($url, $data);
+        $result = json_decode($result, true);
+
+        return isset($result['success']) && $result['success'];
+    }
+
 	// Отключаем кеширование
 	protected function get_cache_key()
 	{
