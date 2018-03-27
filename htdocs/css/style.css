@@ -164,7 +164,7 @@ textarea.input {
 .b-header .phones{
     position: absolute;
     top:15px;
-    left:390px;
+    left:340px;
     background: url(/image/phones-bg.png) no-repeat 0 30%;
     padding-left: 40px;
 }
@@ -176,6 +176,18 @@ textarea.input {
 
 .b-header .phones .line span{
     color:#ccc;
+}
+
+.b-header .schedule{
+    position: absolute;
+    top:15px;
+    left:570px;
+}
+
+.b-header .schedule .line{
+    font-size:24px;
+    font-family: Century Gothic;
+    color: #619b16;
 }
 
 .b-header .callback {
@@ -750,7 +762,8 @@ textarea.input {
 }
 
 .b-catalog-item .info .photo .image{
-    width:250px;
+    max-width: 250px;
+    max-height: 250px;
 }
 
 .b-catalog-item .info .photo .marker{
