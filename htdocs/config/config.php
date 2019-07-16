@@ -11,7 +11,7 @@ ini_set('date.timezone', 'Europe/Moscow');
 define('SITE_TITLE', 'StarFit');
 
 define('DB_TYPE', 'mysql'); // mysql, pgsql, sqlite
-define('DB_HOST', '127.0.0.1');
+define('DB_HOST', 'mysql');
 define('DB_NAME', 'starfit');
 define('DB_USER', 'starfit');
 define('DB_PASSWORD', 'starfit');
