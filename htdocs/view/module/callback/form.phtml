@@ -4,7 +4,7 @@
 <? if (session::flash('success')) { ?>
 							<p style="color: #448600; font-size: 16px;"><b>Спасибо за Вашу заявку. Наш менеджер перезвонит Вам в указанное время.</b></p>
 <? } else { ?>
-							<form method="POST">
+							<form method="POST" id="callback-form">
 								<div class="field">
 									Ваше имя, фамилия, отчество <span class="require">*</span>:
 									<br />
@@ -37,15 +37,17 @@
 									<span class="require"><?= $this->error['callback_comment'] ?></span>
 <? } ?>
 								</div>
-                                <div class="field fail">
-                                    <script src='https://www.google.com/recaptcha/api.js'></script>
-                                    <div class="g-recaptcha" data-sitekey="<?= get_preference('recaptcha_public') ?>"></div>
+								<div class="field">
+                                    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                                    <script>
+                                        function onSubmit(token) {
+                                            document.getElementById("callback-form").submit();
+                                        }
+                                    </script>
+									<input type="button" value="Заказать звонок" class="g-recaptcha" data-sitekey="<?= get_preference('recaptcha_public') ?>" data-callback='onSubmit' />
 <? if ($this->error['captcha']) { ?>
                                     <span class="require"><?= $this->error['captcha'] ?></span>
 <? } ?>
-                                </div>
-								<div class="field">
-									<input type="submit" value="Заказать звонок" class="btn" />
 								</div>
 							</form>
 <? } ?>
